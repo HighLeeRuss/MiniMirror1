@@ -3,37 +3,44 @@ using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
 
-public class NetworkedFlashingLight : NetworkBehaviour
+namespace RileyMcGowan
 {
-    private Light mainLight;
-    void Start()
+    public class NetworkedFlashingLight : NetworkBehaviour
     {
-        mainLight = GetComponent<Light>();
-    }
-
-    void FixedUpdate()
-    {
-        for (int i = 0; i < 5; i++)
-        {
-            if (i > 4 && hasAuthority)
-            {
-                Color currentColour = new Color(Random.value, Random.value, Random.value);
-                RpcChangeLightColour(currentColour);
-            }
-        }
-    }
-
-    [ClientRpc]
-    private void RpcChangeLightColour(Color colourToChange)
-    {
-        if (mainLight != null)
-        {
-            mainLight.color = colourToChange;
-        }
-        else
+        private Light mainLight;
+        void Start()
         {
             mainLight = GetComponent<Light>();
-            mainLight.color = colourToChange;
+        }
+
+        void FixedUpdate()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                if (i > 4)
+                {
+                    Color currentColour = new Color(Random.value, Random.value, Random.value);
+                    if (isClient)
+                    {
+                        Debug.Log(currentColour);
+                        RpcChangeLightColour(currentColour);
+                    }
+                }
+            }
+        }
+
+        [ClientRpc]
+        private void RpcChangeLightColour(Color colourToChange)
+        {
+            if (mainLight != null)
+            {
+                mainLight.color = colourToChange;
+            }
+            else
+            {
+                mainLight = GetComponent<Light>();
+                mainLight.color = colourToChange;
+            }
         }
     }
 }
