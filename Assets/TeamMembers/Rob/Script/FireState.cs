@@ -8,6 +8,7 @@ public class FireState : StateBase
     public override void Enter()
     {
         base.Enter();
+        
     }
 
     public override void Execute()
