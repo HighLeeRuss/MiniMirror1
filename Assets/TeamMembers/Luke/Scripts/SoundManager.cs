@@ -24,8 +24,10 @@ public class SoundManager : NetworkBehaviour
         
     }
 
-    public void Awake()
+    public override void OnStartServer()
     {
+        base.OnStartServer();
+        
         if (isServer)
         {
             gameManager.StartLevelEvent += RpcStartMusic;
