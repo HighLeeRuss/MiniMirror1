@@ -302,7 +302,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.103
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -709,8 +709,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3307382415666870105, guid: 0c2737caa2ac643438ce38a794bb7381,
         type: 3}
+      propertyPath: gridTileSpawn.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3307382415666870105, guid: 0c2737caa2ac643438ce38a794bb7381,
+        type: 3}
+      propertyPath: gridTileSpawn.y
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3307382415666870105, guid: 0c2737caa2ac643438ce38a794bb7381,
+        type: 3}
       propertyPath: locationsToSpawn.Array.data[0]
       value: 
       objectReference: {fileID: 1396591221}
+    - target: {fileID: 3307382415666870105, guid: 0c2737caa2ac643438ce38a794bb7381,
+        type: 3}
+      propertyPath: spawnableTilesObjects.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3307382415666870105, guid: 0c2737caa2ac643438ce38a794bb7381,
+        type: 3}
+      propertyPath: spawnableTilesObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 6649979497077403534, guid: 4d7cf75d29fb89c469b5908d30feb68c,
+        type: 3}
+    - target: {fileID: 3307382415666870105, guid: 0c2737caa2ac643438ce38a794bb7381,
+        type: 3}
+      propertyPath: spawnableTilesObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 8059911068315229969, guid: d3c22faaa36df2d44b6cfe78ed733411,
+        type: 3}
+    - target: {fileID: 3307382415666870105, guid: 0c2737caa2ac643438ce38a794bb7381,
+        type: 3}
+      propertyPath: spawnableTilesObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 8059911068315229969, guid: d3c22faaa36df2d44b6cfe78ed733411,
+        type: 3}
+    - target: {fileID: 3307382415666870105, guid: 0c2737caa2ac643438ce38a794bb7381,
+        type: 3}
+      propertyPath: spawnableTilesObjects.Array.data[3]
+      value: 
+      objectReference: {fileID: 8059911068315229969, guid: d3c22faaa36df2d44b6cfe78ed733411,
+        type: 3}
+    - target: {fileID: 3307382415666870105, guid: 0c2737caa2ac643438ce38a794bb7381,
+        type: 3}
+      propertyPath: spawnableTilesObjects.Array.data[4]
+      value: 
+      objectReference: {fileID: 8059911068315229969, guid: d3c22faaa36df2d44b6cfe78ed733411,
+        type: 3}
+    - target: {fileID: 3307382415666870105, guid: 0c2737caa2ac643438ce38a794bb7381,
+        type: 3}
+      propertyPath: spawnableTilesObjects.Array.data[5]
+      value: 
+      objectReference: {fileID: 8059911068315229969, guid: d3c22faaa36df2d44b6cfe78ed733411,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c2737caa2ac643438ce38a794bb7381, type: 3}
