@@ -14,6 +14,11 @@ public class Editor : UnityEditor.Editor
         base.OnInspectorGUI();
         GameManager gameManager = (GameManager) target;
 
+        if (GUILayout.Button("Level Reset"))
+        {
+            gameManager.ResetLevel();
+        }
+        
         if (GUILayout.Button("Start Level"))
         {
             gameManager.StartLevel();
