@@ -1,20 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using Rob;
+using System;
 
 namespace Rob
 { 
     public class StateManager : MonoBehaviour
     {
-        public StateBase endState;
         public StateBase currentState;
-        public StateBase newState;
 
-        public void ChangeState()
+        public void ChangeState(StateBase newState)
         {
-            
+            if (currentState != null)
+            {
+                currentState.active = false;
+                currentState.Exit?.Invoke;
+            }
+		
+            if (newState != null)
+            {
+                newState.active = true;
+                newState.Enter?.Invoke;
+                currentState = newState;
+            }
         }
     }
 }
