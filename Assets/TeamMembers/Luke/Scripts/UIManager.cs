@@ -8,7 +8,7 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     //References
-    
+    public Timer timer;
 
     //variables
     public TextMeshProUGUI TimerText;
@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        TimerText = timer.GetComponentInChildren<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -26,24 +26,14 @@ public class UIManager : MonoBehaviour
         
     }
 
-    private void OnEnable()
-    {
-        throw new NotImplementedException();
-    }
-
-    private void OnDisable()
-    {
-        throw new NotImplementedException();
-    }
-
-    public void HealthBar()
+    public void ShowHealthBar()
     {
         
     }
 
-    public void Timer()
+    public void PrintTimer()
     {
-        
+        TimerText.text = timer.currentTime.ToString();
     }
     
     
