@@ -8,15 +8,16 @@ using Rob;
 
 namespace Rob
 {
-    [CustomEditor(typeof(StateBase), true)]
+    [CustomEditor(typeof(StateManager), true)]
 
     public class StateBaseEditor : Editor
     {
         public override void OnInspectorGUI()
         {
+            base.OnInspectorGUI();
             GUILayout.BeginHorizontal();
 
-            //base.OnInspectorGUI();
+            
             if (GUILayout.Button("Force Enter"))
             {
                 ((StateBase) target).Enter();

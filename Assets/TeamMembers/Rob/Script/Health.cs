@@ -6,20 +6,8 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     public int health;
+    public event Action TakeDamage;
+    
 
 
-    public void OnEnable()
-    {
-        FindObjectOfType<EventManager>().TakeDamage += DamageDealt;
-    }
-
-    public void OnDisable()
-    {
-        FindObjectOfType<EventManager>().TakeDamage -= DamageDealt;    
-    }
-
-    public void DamageDealt()
-    {
-      //take damage   
-    }
 }
