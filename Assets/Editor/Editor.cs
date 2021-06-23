@@ -21,7 +21,7 @@ public class Editor : UnityEditor.Editor
         
         if (GUILayout.Button("Start Level"))
         {
-            gameManager.StartLevel();
+            gameManager.CmdRequestStartLevel();
         }
 
         if (GUILayout.Button("Lose Level"))

@@ -1,12 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 using RileyMcGowan;
 
 namespace Luke
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : NetworkBehaviour
     {
 
         /// <summary>
@@ -52,11 +53,18 @@ namespace Luke
         {
             LoadLevelEvent?.Invoke();
         }
-        
+
         /// <summary>
         /// Send event to spawn Players and ProtectionPoints + start timer???
         /// </summary>
-        public void StartLevel()
+        [Command(requiresAuthority = false)]
+        public void CmdRequestStartLevel()
+        {
+            RpcStartLevel();
+        }
+        
+        [ClientRpc]
+        public void RpcStartLevel()
         {
             StartLevelEvent?.Invoke();
         }
