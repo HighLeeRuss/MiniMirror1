@@ -14,13 +14,13 @@ namespace Rob
             if (currentState != null)
             {
                 currentState.active = false;
-                currentState.Exit?.Invoke;
+                currentState.Exit();
             }
 		
             if (newState != null)
             {
                 newState.active = true;
-                newState.Enter?.Invoke;
+                newState.Enter(); //just doing this as a test
                 currentState = newState;
             }
         }
