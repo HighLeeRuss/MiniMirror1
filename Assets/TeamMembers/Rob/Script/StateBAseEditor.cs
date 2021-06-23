@@ -6,7 +6,7 @@ using Rob;
 
 [CustomEditor(typeof(StateBase), true)]
 
-public class StateBAseEditor : Editor
+public class StateBaseEditor : Editor
 {
     public override void OnInspectorGUI()
     {
@@ -15,19 +15,19 @@ public class StateBAseEditor : Editor
         //base.OnInspectorGUI();
         if (GUILayout.Button("Force Enter"))
         {
-            Debug.Log("PRESSED!");
+            ((StateBase)target).Enter();
         }
         
         //base.OnInspectorGUI();
         if (GUILayout.Button("Force Execute"))
         {
-            Debug.Log("Executing!!!");
+            ((StateBase)target).Execute();
         }
         
         //base.OnInspectorGUI();
         if (GUILayout.Button("Force Exit"))
         {
-            Debug.Log("EXIT!");
+            ((StateBase)target).Exit();
         }
         
         GUILayout.EndHorizontal();
