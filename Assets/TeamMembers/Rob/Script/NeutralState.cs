@@ -3,20 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rob;
 
-public class NeutralState : StateBase
+
+namespace Rob
 {
-    public override void Enter()
-    {
-        base.Enter();
-    }
 
-    public override void Execute()
+    public class NeutralState : StateBase
     {
-        base.Execute();
-    }
+        public override void Enter()
+        {
+            base.Enter();
+        }
 
-    public override void Exit()
-    {
-        base.Exit();
+        public override void Execute()
+        {
+            base.Execute();
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
     }
 }

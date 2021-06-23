@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rob;
 
-public class SmokeState : StateBase
+
+namespace Rob
 {
-    public override void Enter()
+    public class SmokeState : StateBase
     {
-        base.Enter();
-    }
+        public override void Enter()
+        {
+            base.Enter();
+        }
 
-    public override void Execute()
-    {
-        base.Execute();
-    }
+        public override void Execute()
+        {
+            base.Execute();
+        }
 
-    public override void Exit()
-    {
-        base.Exit();
+        public override void Exit()
+        {
+            base.Exit();
+        }
     }
 }

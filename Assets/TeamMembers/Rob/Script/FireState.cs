@@ -3,30 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rob;
 
-
-public class FireState : StateBase
+namespace Rob
 {
-    private Renderer rend;
-    
-    public override void Enter()
+
+
+    public class FireState : StateBase
     {
-        base.Enter();
-        Debug.Log("Entered");
-        rend = GetComponent<Renderer>(); //getting the renderer of the tile
-    }
+        private Renderer rend;
 
-    public override void Execute()
-    {
-        base.Execute();
-        Debug.Log("executing");
+        public override void Enter()
+        {
+            base.Enter();
+            Debug.Log("Entered");
+            rend = GetComponent<Renderer>(); //getting the renderer of the tile
+        }
 
-        //if you're on fire
-        rend.material.SetColor("Color", Color.red);
+        public override void Execute()
+        {
+            base.Execute();
+            Debug.Log("executing");
 
-    }
+            //if you're on fire
+            rend.material.SetColor("Color", Color.red);
 
-    public override void Exit()
-    {
-        base.Exit();
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+        }
     }
 }
