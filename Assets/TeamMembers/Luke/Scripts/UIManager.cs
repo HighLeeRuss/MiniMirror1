@@ -25,7 +25,7 @@ namespace Luke
         // Update is called once per frame
         void Update()
         {
-            RpcPrintTimer();
+            CmdRequestPrintTimer();
         }
 
         public void ShowHealthBar()
@@ -33,12 +33,22 @@ namespace Luke
             
         }
 
+        /// <summary>
+        /// server
+        /// </summary>
+        [Command(requiresAuthority = false)]
+        public void CmdRequestPrintTimer()
+        {
+            RpcPrintTimer();
+        }
+
+        /// <summary>
+        /// client
+        /// </summary>
         [ClientRpc]
         public void RpcPrintTimer()
         {
             TimerText.text = timer.currentTime.ToString();
         }
-
-
     }
 }

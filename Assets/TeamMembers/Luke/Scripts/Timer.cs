@@ -29,7 +29,7 @@ namespace Luke
         // Update is called once per frame
         void Update()
         {
-            if (timeStarted)
+            if (timeStarted & isServer)
             {
                 UpdateTime();
             }
