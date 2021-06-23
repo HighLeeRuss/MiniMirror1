@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 namespace RileyMcGowan
 {
-    public class Spawner : MonoBehaviour
+    public class Spawner : NetworkBehaviour
     {
-        private GameObject[] spawnedTiles;
+        private List<GameObject> spawnedTiles;
+        private int tilesCounter;
 
         [Tooltip("Tiles to spawn")] 
         public GameObject[] spawnableTilesObjects;
@@ -15,10 +17,18 @@ namespace RileyMcGowan
         [Tooltip("How many tiles to spawn")]
         public Vector2 gridTileSpawn;
 
-        void Start()
+        public override void OnStartServer()
         {
+            base.OnStartServer();
+            if (isServer == false)
+            {
+                return;
+            }
+
+            spawnedTiles = new List<GameObject>();
             if (spawnableTilesObjects != null) ///TILE SPAWNER///
             {
+                tilesCounter = 0;
                 //Spawn the x grid
                 for (int i = 0; i < gridTileSpawn.x; i++)
                 {
@@ -41,10 +51,12 @@ namespace RileyMcGowan
             }
         }
 
-        //[ClientRpc]
         private void SpawnTile(Vector3 spawnLocation, int toSpawn)
         {
-            Instantiate(spawnableTilesObjects[toSpawn], spawnLocation, Quaternion.identity);
+            GameObject spawnedObject = Instantiate(spawnableTilesObjects[toSpawn], spawnLocation, Quaternion.identity);
+            NetworkServer.Spawn(spawnedObject); //Spawn the object for the server
+            spawnedTiles.Add(spawnedObject);
+            tilesCounter += 1;
         }
     }
 }
