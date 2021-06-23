@@ -5,79 +5,98 @@ using Luke;
 using Mirror;
 using UnityEngine;
 
-public class Timer : NetworkBehaviour
+namespace Luke
 {
-    //Reference
-    public GameManager gameManager;
-    
-    //variables
-    public float currentTime;
-    public float maxTime;
-    private float tick;
-    
-    //events
-    public event Action TimerEndEvent;
-
-    // Start is called before the first frame update
-    void Start()
+    public class Timer : NetworkBehaviour
     {
-        
-    }
+        //Reference
+        public GameManager gameManager;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        //variables
+        public float currentTime;
+        public float maxTime;
+        public bool timeStarted;
 
-    /// <summary>
-    /// called when resetting level
-    /// </summary>
-    public void ResetTime()
-    {
-        currentTime = 0;
-    }
+        //events
+        public event Action TimerEndEvent;
 
-    /// <summary>
-    /// On level start
-    /// </summary>
-    public void StartTime()
-    {
-        if (isServer)
+        // Start is called before the first frame update
+        void Start()
         {
-            currentTime = maxTime;
-            tick = 1f;
-            currentTime -= tick;
-          
-            if (currentTime <= 0)
+            
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            if (timeStarted)
             {
-                //Game over stuff wants to know this
-                TimerEndEvent?.Invoke();
-            }  
+                UpdateTime();
+            }
         }
-    }
 
-    /// <summary>
-    /// if we want to pause game
-    /// </summary>
-    public void PauseTime()
-    {
-        
-    }
-
-    private void OnEnable()
-    {
-        if (isServer)
+        /// <summary>
+        /// called when resetting level
+        /// </summary>
+        public void ResetTime()
         {
-            gameManager.StartLevelEvent += StartTime;
+            currentTime = 0;
         }
-    }
 
-    private void OnDisable()
-    {
-        if (isServer)
+        /// <summary>
+        /// On level start
+        /// </summary>
+        public void StartTime()
         {
-            gameManager.StartLevelEvent -= StartTime;
+            if (isServer)
+            {
+                timeStarted = true;
+                currentTime = maxTime;
+            }
+        }
+
+        public void UpdateTime()
+        {
+            if (isServer)
+            {
+                currentTime -= Time.deltaTime;
+
+                if (currentTime <= 0)
+                {
+                    PauseTime();
+                    //Game over stuff wants to know this
+                    TimerEndEvent?.Invoke();
+                }
+            }
+        }
+
+        /// <summary>
+        /// if we want to pause game
+        /// </summary>
+        public void PauseTime()
+        {
+            
+        }
+
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+            
+            if (isServer)
+            {
+                gameManager.StartLevelEvent += StartTime;
+            }
+        }
+
+        public override void OnStopServer()
+        {
+            base.OnStopServer();
+            
+            if (isServer)
+            {
+                gameManager.StartLevelEvent -= StartTime;
+            }
+            
         }
     }
 }

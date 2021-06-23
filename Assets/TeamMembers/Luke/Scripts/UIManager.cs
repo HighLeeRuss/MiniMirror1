@@ -5,36 +5,38 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class UIManager : MonoBehaviour
+namespace Luke
 {
-    //References
-    public Timer timer;
-
-    //variables
-    public TextMeshProUGUI TimerText;
-
-
-    // Start is called before the first frame update
-    void Start()
+    public class UIManager : MonoBehaviour
     {
-        TimerText = timer.GetComponentInChildren<TextMeshProUGUI>();
-    }
+        //References
+        public Timer timer;
 
-    // Update is called once per frame
-    void Update()
-    {
+        //variables
+        public TextMeshProUGUI TimerText;
         
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            TimerText = timer.GetComponentInChildren<TextMeshProUGUI>();
+        }
 
-    public void ShowHealthBar()
-    {
-        
-    }
+        // Update is called once per frame
+        void Update()
+        {
+            PrintTimer();
+        }
 
-    public void PrintTimer()
-    {
-        TimerText.text = timer.currentTime.ToString();
+        public void ShowHealthBar()
+        {
+            
+        }
+
+        public void PrintTimer()
+        {
+            TimerText.text = timer.currentTime.ToString();
+        }
+
+
     }
-    
-    
 }
