@@ -2,9 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Luke;
+using Mirror;
 using UnityEngine;
 
-public class Timer : MonoBehaviour
+public class Timer : NetworkBehaviour
 {
     //Reference
     public GameManager gameManager;
@@ -12,6 +13,10 @@ public class Timer : MonoBehaviour
     //variables
     public float currentTime;
     public float maxTime;
+    private float tick;
+    
+    //events
+    public event Action TimerEndEvent;
 
     // Start is called before the first frame update
     void Start()
@@ -38,11 +43,17 @@ public class Timer : MonoBehaviour
     /// </summary>
     public void StartTime()
     {
-        //currentTime = Time.time;
-
-        if (currentTime > maxTime)
+        if (isServer)
         {
             currentTime = maxTime;
+            tick = 1f;
+            currentTime -= tick;
+          
+            if (currentTime <= 0)
+            {
+                //Game over stuff wants to know this
+                TimerEndEvent?.Invoke();
+            }  
         }
     }
 
@@ -56,11 +67,17 @@ public class Timer : MonoBehaviour
 
     private void OnEnable()
     {
-        gameManager.StartLevelEvent += StartTime;
+        if (isServer)
+        {
+            gameManager.StartLevelEvent += StartTime;
+        }
     }
 
     private void OnDisable()
     {
-        gameManager.StartLevelEvent -= StartTime;
+        if (isServer)
+        {
+            gameManager.StartLevelEvent -= StartTime;
+        }
     }
 }
