@@ -1,13 +1,14 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
 namespace Luke
 {
-    public class UIManager : MonoBehaviour
+    public class UIManager : NetworkBehaviour
     {
         //References
         public Timer timer;
@@ -24,7 +25,7 @@ namespace Luke
         // Update is called once per frame
         void Update()
         {
-            PrintTimer();
+            RpcPrintTimer();
         }
 
         public void ShowHealthBar()
@@ -32,7 +33,8 @@ namespace Luke
             
         }
 
-        public void PrintTimer()
+        [ClientRpc]
+        public void RpcPrintTimer()
         {
             TimerText.text = timer.currentTime.ToString();
         }
