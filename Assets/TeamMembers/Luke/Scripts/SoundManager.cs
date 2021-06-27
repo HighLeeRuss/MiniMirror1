@@ -5,38 +5,41 @@ using Luke;
 using Mirror;
 using UnityEngine;
 
-public class SoundManager : NetworkBehaviour
+namespace Luke
 {
-    //Reference
-    public GameManager gameManager;
-    
-    //Variables
-    
-    // Start is called before the first frame update
-    void Start()
+    public class SoundManager : NetworkBehaviour
     {
-        
-    }
+        //Reference
+        public GameManager gameManager;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+        //Variables
 
-    public override void OnStartServer()
-    {
-        base.OnStartServer();
-        
-        if (isServer)
+        // Start is called before the first frame update
+        void Start()
         {
-            gameManager.StartLevelEvent += RpcStartMusic;
-        }
-    }
 
-    [ClientRpc]
-    public void RpcStartMusic()
-    {
-        Debug.Log("playing music now");
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+
+            if (isServer)
+            {
+                gameManager.StartLevelEvent += RpcStartMusic;
+            }
+        }
+
+        [ClientRpc]
+        public void RpcStartMusic()
+        {
+            Debug.Log("playing music now");
+        }
     }
 }

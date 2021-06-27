@@ -14,41 +14,29 @@ namespace Luke
         public Timer timer;
 
         //variables
-        public TextMeshProUGUI TimerText;
+        public TextMeshProUGUI timerText;
         
         // Start is called before the first frame update
         void Start()
         {
-            TimerText = timer.GetComponentInChildren<TextMeshProUGUI>();
+            timerText = timer.GetComponentInChildren<TextMeshProUGUI>();
         }
 
         // Update is called once per frame
         void Update()
         {
-            CmdRequestPrintTimer();
+            PrintTimer();
         }
 
         public void ShowHealthBar()
         {
             
         }
-
-        /// <summary>
-        /// server
-        /// </summary>
-        [Command(requiresAuthority = false)]
-        public void CmdRequestPrintTimer()
+        
+        public void PrintTimer()
         {
-            RpcPrintTimer();
-        }
-
-        /// <summary>
-        /// client
-        /// </summary>
-        [ClientRpc]
-        public void RpcPrintTimer()
-        {
-            TimerText.text = timer.currentTime.ToString();
+            // on the left 0 for the minutes and right of the colon is 1 for seconds
+            timerText.text = string.Format("{0:00}:{1:00}", timer.minutes, timer.seconds);
         }
     }
 }
