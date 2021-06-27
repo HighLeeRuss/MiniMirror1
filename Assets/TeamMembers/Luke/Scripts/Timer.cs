@@ -89,9 +89,11 @@ namespace Luke
                     TimerEndEvent?.Invoke();
                 }
 
-                //making the timer into minutes and seconds
+                //making the timer have minutes and seconds limits
                 minutes = Mathf.FloorToInt(displayTime / 60);
                 seconds = Mathf.FloorToInt(displayTime % 60);
+                
+                //TODO: the zero second isn't actually zero when it ticks (still some milliseconds to consider)
             }
         }
         
