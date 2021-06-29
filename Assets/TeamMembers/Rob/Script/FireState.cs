@@ -27,16 +27,13 @@ namespace Rob
             base.Enter();
             Debug.Log("Entered");
             rend = GetComponent<Renderer>(); //getting the renderer of the tile
+            
         }
 
         public override void Execute()
         {
             base.Execute();
             Debug.Log("executing");
-
-            //if you're on fire
-            rend.material.SetColor("Color", Color.red);
-
         }
 
         public override void Exit()
@@ -44,9 +41,22 @@ namespace Rob
             base.Exit();
         }
 
-        void Damage()
+        public void Damage()
         {
             //do damage things
+            Debug.Log("Damaged, ouch");
+        }
+
+        public void OnCollisionEnter(Collision col)
+        {
+            //is on fire
+            OnFire();
+            
+        }
+
+        public void OnFire()
+        {
+            rend.material.SetColor("Color", Color.red);
         }
     }
 }

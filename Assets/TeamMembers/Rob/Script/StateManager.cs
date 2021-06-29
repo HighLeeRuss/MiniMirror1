@@ -20,7 +20,7 @@ namespace Rob
             if (newState != null)
             {
                 newState.active = true;
-                newState.Enter(); //just doing this as a test
+                newState.Enter(); 
                 currentState = newState;
             }
         }
