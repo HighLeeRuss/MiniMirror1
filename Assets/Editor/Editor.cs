@@ -18,6 +18,11 @@ public class Editor : UnityEditor.Editor
         {
             gameManager.ResetLevel();
         }
+
+        if (GUILayout.Button("Load Level"))
+        {
+            gameManager.LoadLevel();
+        }
         
         if (GUILayout.Button("Start Level"))
         {

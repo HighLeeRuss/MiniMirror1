@@ -8,7 +8,7 @@ using TMPro;
 
 namespace Luke
 {
-    public class UIManager : NetworkBehaviour
+    public class UIManager : MonoBehaviour
     {
         //References
         public Timer timer;
