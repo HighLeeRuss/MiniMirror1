@@ -5,7 +5,7 @@ using System;
 
 namespace Rob
 { 
-    public class StateManager : MonoBehaviour
+    public class TileStateManager : MonoBehaviour
     {
         public StateBase currentState;
 
@@ -23,6 +23,11 @@ namespace Rob
                 newState.Enter(); 
                 currentState = newState;
             }
+        }
+        
+        public void UpdateCurrentState()
+        {
+            currentState?.Execute();
         }
     }
 }

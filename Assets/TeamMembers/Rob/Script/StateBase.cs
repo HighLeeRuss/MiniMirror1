@@ -8,7 +8,7 @@ namespace Rob
     
     
 
-        [Serializable]
+        //[Serializable]
     public class StateBase : MonoBehaviour
     { 
             

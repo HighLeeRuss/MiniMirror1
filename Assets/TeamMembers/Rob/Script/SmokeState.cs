@@ -31,6 +31,7 @@ namespace Rob
         public override void Execute()
         {
             base.Execute();
+            //if im smoking
             rend.material.SetColor("Color", Color.grey);
         }
 

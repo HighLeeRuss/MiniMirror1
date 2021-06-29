@@ -11,6 +11,7 @@ namespace Rob
     public class FireState : StateBase
     {
         private Renderer rend;
+        private int moistness; 
 
         public void OnEnable()
         {
@@ -28,12 +29,14 @@ namespace Rob
             Debug.Log("Entered");
             rend = GetComponent<Renderer>(); //getting the renderer of the tile
             
+            
         }
 
         public override void Execute()
         {
             base.Execute();
             Debug.Log("executing");
+            rend.material.SetColor("Color", Color.red);
         }
 
         public override void Exit()
@@ -46,17 +49,6 @@ namespace Rob
             //do damage things
             Debug.Log("Damaged, ouch");
         }
-
-        public void OnCollisionEnter(Collision col)
-        {
-            //is on fire
-            OnFire();
-            
-        }
-
-        public void OnFire()
-        {
-            rend.material.SetColor("Color", Color.red);
-        }
+        
     }
 }
