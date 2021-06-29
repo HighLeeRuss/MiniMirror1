@@ -264,12 +264,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &1396591221 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 850197816573017155, guid: c4dbd68b218de9647a726e68f799afb4,
-    type: 3}
-  m_PrefabInstance: {fileID: 850197815246976566}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1720008226
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,13 +636,13 @@ PrefabInstance:
     - target: {fileID: 3307382415666870105, guid: 0c2737caa2ac643438ce38a794bb7381,
         type: 3}
       propertyPath: locationsToSpawn.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3307382415666870105, guid: 0c2737caa2ac643438ce38a794bb7381,
         type: 3}
       propertyPath: locationsToSpawn.Array.data[0]
       value: 
-      objectReference: {fileID: 1396591221}
+      objectReference: {fileID: 0}
     - target: {fileID: 3307382415666870105, guid: 0c2737caa2ac643438ce38a794bb7381,
         type: 3}
       propertyPath: spawnableTilesObjects.Array.size

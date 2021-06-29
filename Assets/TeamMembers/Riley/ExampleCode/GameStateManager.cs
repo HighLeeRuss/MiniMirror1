@@ -12,7 +12,7 @@ namespace RileyMcGowan
         public DelegateState startOfGame = new DelegateState();
         public DelegateState currentGame = new DelegateState();
         public DelegateState endOfGame = new DelegateState();
-
+        
         private void Start()
         {
             //Tell the states what they have to run in the following order: (Enter, Update, Exit)
