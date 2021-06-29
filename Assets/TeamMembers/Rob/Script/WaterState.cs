@@ -12,9 +12,7 @@ namespace Rob
     public class WaterState : StateBase
     {
         private Renderer rend;
-<<<<<<< HEAD
-        
-=======
+
 
         public void OnEnable()
         {
@@ -25,7 +23,7 @@ namespace Rob
         {
             FindObjectOfType<Health>().TakeDamage -= Damage;
         }
->>>>>>> aed053d83527260cd9d31c3a3c57ac9abc3fd1d1
+
         public override void Enter()
         {
             base.Enter();
