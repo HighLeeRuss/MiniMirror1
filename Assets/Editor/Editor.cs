@@ -16,12 +16,12 @@ public class Editor : UnityEditor.Editor
 
         if (GUILayout.Button("Level Reset"))
         {
-            gameManager.ResetLevel();
+            gameManager.CmdRequestResetLevel();
         }
 
         if (GUILayout.Button("Load Level"))
         {
-            gameManager.LoadLevel();
+            gameManager.CmdRequestLoadLevel();
         }
         
         if (GUILayout.Button("Start Level"))
@@ -31,12 +31,12 @@ public class Editor : UnityEditor.Editor
 
         if (GUILayout.Button("Lose Level"))
         {
-            gameManager.GameLoss();
+            gameManager.CmdRequestGameLoss();
         }
 
         if (GUILayout.Button("Win Level"))
         {
-            gameManager.GameWon();
+            gameManager.CmdRequestGameWon();
         }
     }
 }

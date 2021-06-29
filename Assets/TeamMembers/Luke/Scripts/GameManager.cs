@@ -10,11 +10,8 @@ namespace Luke
     public class GameManager : NetworkBehaviour
     {
 
-        /// <summary>
-        /// maybe add a singleton here??
-        /// </summary>
-
         //References
+        public GameStateManager gameStateManager;
 
         //Events
         public event Action ResetLevelEvent;
@@ -25,23 +22,17 @@ namespace Luke
 
         //Variables
         
-        
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-        
         /// <summary>
         /// Send event to wipe a clean slate of tiles and bring back HP to players and protection points
         /// </summary>
-        public void ResetLevel()
+        [Command(requiresAuthority = false)]
+        public void CmdRequestResetLevel()
+        {
+            RpcResetLevel();
+        }
+        [ClientRpc]
+        public void RpcResetLevel()
         {
             ResetLevelEvent?.Invoke();
         }
@@ -49,7 +40,14 @@ namespace Luke
         /// <summary>
         /// Send event to setup of level before we start the game. Tell fire to do its thing + spawning positions and any PowerUps???
         /// </summary>
-        public void LoadLevel()
+        [Command(requiresAuthority = false)]
+        public void CmdRequestLoadLevel()
+        {
+            RpcLoadLevel();
+        }
+
+        [ClientRpc]
+        public void RpcLoadLevel()
         {
             LoadLevelEvent?.Invoke();
         }
@@ -67,22 +65,39 @@ namespace Luke
         public void RpcStartLevel()
         {
             StartLevelEvent?.Invoke();
+            gameStateManager.stateManager.ChangeState(gameStateManager.startOfGame);
         }
 
         /// <summary>
         /// Send event to bring up end game screen and show finish time??? receive events from Protection Points and player HP
         /// </summary>
-        public void GameLoss()
+        [Command(requiresAuthority = false)]
+        public void CmdRequestGameLoss()
+        {
+            RpcGameLoss();
+        }
+        
+        [ClientRpc]
+        public void RpcGameLoss()
         {
             GameLossEvent?.Invoke();
+            gameStateManager.stateManager.ChangeState(gameStateManager.endOfGame);
         }
 
         /// <summary>
         /// Send event to bring up end game screen and show finish time??? check collective tiles in scene +  event from timer???
         /// </summary>
-        public void GameWon()
+        [Command(requiresAuthority = false)]
+        public void CmdRequestGameWon()
+        {
+            RpcGameWon();
+        }
+        
+        [ClientRpc]
+        public void RpcGameWon()
         {
             GameWonEvent?.Invoke();
+            gameStateManager.stateManager.ChangeState(gameStateManager.endOfGame);
         }
     }
 }
