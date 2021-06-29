@@ -13,9 +13,14 @@ namespace Luke
         public GameManager gameManager;
 
         //variables
+        [SyncVar]
         public float currentTime;
         public float maxTime;
         public bool timeStarted;
+        [SyncVar]
+        public float minutes;
+        [SyncVar]
+        public float seconds;
 
         //events
         public event Action TimerEndEvent;
@@ -29,9 +34,9 @@ namespace Luke
         // Update is called once per frame
         void Update()
         {
-            if (timeStarted & isServer)
+            if (timeStarted)
             {
-                UpdateTime();
+                CmdRequestUpdateTime();
             }
         }
 
@@ -40,13 +45,21 @@ namespace Luke
         /// </summary>
         public void ResetTime()
         {
-            currentTime = 0;
+            currentTime = maxTime;
         }
 
         /// <summary>
         /// On level start
         /// </summary>
-        public void StartTime()
+
+        [Command(requiresAuthority = false)]
+        public void CmdRequestStartTime()
+        {
+            RpcStartTime();
+        }
+        
+        [ClientRpc]
+        public void RpcStartTime()
         {
             if (isServer)
             {
@@ -55,7 +68,14 @@ namespace Luke
             }
         }
 
-        public void UpdateTime()
+        [Command(requiresAuthority = false)]
+        public void CmdRequestUpdateTime()
+        {
+            RpcUpdateTime(currentTime);
+        }
+
+        [ClientRpc]
+        public void RpcUpdateTime(float displayTime)
         {
             if (isServer)
             {
@@ -63,12 +83,20 @@ namespace Luke
 
                 if (currentTime <= 0)
                 {
+                    currentTime = 0;
                     PauseTime();
                     //Game over stuff wants to know this
                     TimerEndEvent?.Invoke();
                 }
+
+                //making the timer have minutes and seconds limits
+                minutes = Mathf.FloorToInt(displayTime / 60);
+                seconds = Mathf.FloorToInt(displayTime % 60);
+                
+                //TODO: the zero second isn't actually zero when it ticks (still some milliseconds to consider)
             }
         }
+        
 
         /// <summary>
         /// if we want to pause game
@@ -84,7 +112,7 @@ namespace Luke
             
             if (isServer)
             {
-                gameManager.StartLevelEvent += StartTime;
+                gameManager.StartLevelEvent += CmdRequestStartTime;
             }
         }
 
@@ -94,7 +122,7 @@ namespace Luke
             
             if (isServer)
             {
-                gameManager.StartLevelEvent -= StartTime;
+                gameManager.StartLevelEvent -= CmdRequestStartTime;
             }
             
         }

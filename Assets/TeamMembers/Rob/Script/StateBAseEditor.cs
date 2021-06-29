@@ -8,7 +8,7 @@ using Rob;
 
 namespace Rob
 {
-    [CustomEditor(typeof(StateManager), true)]
+    [CustomEditor(typeof(StateBase), true)]
 
     public class StateBaseEditor : Editor
     {
@@ -21,6 +21,8 @@ namespace Rob
             if (GUILayout.Button("Force Enter"))
             {
                 ((StateBase) target).Enter();
+
+
             }
 
             //base.OnInspectorGUI();
