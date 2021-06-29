@@ -526,7 +526,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnPrefabs.Array.data[0]
       value: 
-      objectReference: {fileID: 6649979497077403534, guid: 4d7cf75d29fb89c469b5908d30feb68c,
+      objectReference: {fileID: 2543719809092828756, guid: 715ba4e0ce9b6d8449b9d6d5dc811b4e,
         type: 3}
     - target: {fileID: 850197816573017167, guid: c4dbd68b218de9647a726e68f799afb4,
         type: 3}
@@ -658,7 +658,7 @@ PrefabInstance:
         type: 3}
       propertyPath: spawnableTilesObjects.Array.data[0]
       value: 
-      objectReference: {fileID: 6649979497077403534, guid: 4d7cf75d29fb89c469b5908d30feb68c,
+      objectReference: {fileID: 2543719809092828756, guid: 715ba4e0ce9b6d8449b9d6d5dc811b4e,
         type: 3}
     - target: {fileID: 3307382415666870105, guid: 0c2737caa2ac643438ce38a794bb7381,
         type: 3}
