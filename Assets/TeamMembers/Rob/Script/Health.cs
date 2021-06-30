@@ -31,11 +31,13 @@ public class Health : MonoBehaviour
         if (currentHealth <= 0)
         {
             currentHealth = 0;
+            Debug.Log("Dead");
         }
         Debug.Log("Damaged current health is now " + currentHealth);
         if (currentHealth <= 0)
         {
             GetComponent<EventManager>().CallDeathEvent();
+            
         }
         
     }
