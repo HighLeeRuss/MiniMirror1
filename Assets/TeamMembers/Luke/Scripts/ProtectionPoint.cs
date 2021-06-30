@@ -11,6 +11,9 @@ namespace Luke
         //References
         public Health health;
         
+        //Events
+        public event Action ProtectionPointDestroyedEvent;
+        
         // Start is called before the first frame update
         void Start()
         {
@@ -23,10 +26,20 @@ namespace Luke
             
         }
 
-        public void OnCollisionEnter(Collision other)
+        private void OnEnable()
         {
-            //fire should hold damage amount
-            health.DamageTaken(1);
+            health.DeathEvent += DestroyProtectionPoint;
+        }
+
+        private void OnDisable()
+        {
+            health.DeathEvent -= DestroyProtectionPoint;
+        }
+
+        public void DestroyProtectionPoint()
+        {
+            ProtectionPointDestroyedEvent?.Invoke();
+            Destroy(this);
         }
     }
 }

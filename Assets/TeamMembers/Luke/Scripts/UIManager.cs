@@ -5,6 +5,7 @@ using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Rob;
 
 namespace Luke
 {
@@ -12,6 +13,7 @@ namespace Luke
     {
         //References
         public Timer timer;
+        public Health health;
 
         //variables
         public TextMeshProUGUI timerText;

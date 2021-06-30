@@ -12,6 +12,7 @@ namespace Luke
 
         //References
         public GameStateManager gameStateManager;
+        public Timer timer;
 
         //Events
         public event Action ResetLevelEvent;
@@ -21,7 +22,21 @@ namespace Luke
         public event Action GameWonEvent;
 
         //Variables
-        
+
+
+        public override void OnStartServer()
+        {
+            base.OnStartServer();
+            
+            timer.TimerEndEvent += CmdRequestGameLoss;
+        }
+
+        public override void OnStopServer()
+        {
+            base.OnStopServer();
+
+            timer.TimerEndEvent -= CmdRequestGameLoss;
+        }
 
         /// <summary>
         /// Send event to wipe a clean slate of tiles and bring back HP to players and protection points

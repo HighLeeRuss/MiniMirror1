@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 3320867157211425715}
   - component: {fileID: 7455795992688752123}
   - component: {fileID: 8308712427964354695}
+  - component: {fileID: 6171251333221334874}
   m_Layer: 0
   m_Name: Protection Point
   m_TagString: Untagged
@@ -142,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 517cf593a94be3443a8ff711ffb237f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 10
+  currentHealth: 5
 --- !u!114 &8308712427964354695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,3 +161,16 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &6171251333221334874
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6567569653272511184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b742ecb2d629b8940a7e8d9c7aa1337d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 7455795992688752123}
