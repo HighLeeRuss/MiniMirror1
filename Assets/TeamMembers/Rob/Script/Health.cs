@@ -35,9 +35,5 @@ public class Health : MonoBehaviour
     {
         OnDamage?.Invoke(1f);
     }
-
-    public void Death()
-    {
-        Debug.Log("Died");
-    }
+    
 }

@@ -10,6 +10,7 @@ namespace Rob
     public class HealthEditor : Editor
     {
 
+        public FireState fireState;
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
@@ -22,7 +23,7 @@ namespace Rob
 
             if (GUILayout.Button("Death"))
             {
-                ((Health) target).Death();
+                fireState.Death();
             }
             
             GUILayout.EndHorizontal();
