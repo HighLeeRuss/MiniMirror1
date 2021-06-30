@@ -10,32 +10,42 @@ public class Health : MonoBehaviour
 {
     public float currentHealth;
 
-    public event Action DeathEvent;
-    public delegate void TakeDamage(float damageAmount);
-    public event TakeDamage OnDamage;
+
+    public void OnEnable()
+    {
+        FindObjectOfType<EventManager>().DeathEvent += Death;
+        FindObjectOfType<EventManager>().OnDamageEvent += DamageEventTaken;
+
+    }
+
+    public void OnDisable()
+    {
+        FindObjectOfType<EventManager>().DeathEvent -= Death;
+        FindObjectOfType<EventManager>().OnDamageEvent -= DamageEventTaken;
+    }
 
 
-    public void DamageTaken(float damageAmount)
+    public void DamageEventTaken(float damageAmount)
     {
         currentHealth -= damageAmount;
         if (currentHealth <= 0)
         {
             currentHealth = 0;
         }
-        
         Debug.Log("Damaged current health is now " + currentHealth);
-        
-        if (currentHealth <= 0 )
+        if (currentHealth <= 0)
         {
-            CallDeathEvent();
+            GetComponent<EventManager>().CallDeathEvent();
         }
+        
     }
-    
 
-    public void CallDeathEvent()
+    public void Death()
     {
-        DeathEvent?.Invoke();
+        Debug.Log("Died");
     }
-    
-    
+
+
+
+
 }

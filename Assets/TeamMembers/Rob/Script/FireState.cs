@@ -21,17 +21,17 @@ namespace Rob
         
         
 
-        public void OnEnable()
-        {
-            FindObjectOfType<Health>().DeathEvent += Death;
-            
-        }
-
-        public void OnDisable()
-        {
-            FindObjectOfType<Health>().DeathEvent -= Death;
-            
-        }
+       // public void OnEnable()
+       // {
+       //     FindObjectOfType<EventManager>().OnDamageEvent += DealDamage;
+       //     
+       // }
+//
+       // public void OnDisable()
+       // {
+       //     FindObjectOfType<EventManager>().OnDamageEvent -= DealDamage;
+       //     
+       // }
 
         public override void Enter()
         {
@@ -61,16 +61,9 @@ namespace Rob
             base.Exit();
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
-            other.GetComponent<Health>().DamageTaken(1f);
-        }
-        
-
-        public void Death()
-        {
-            //destroy the player
-            Debug.Log("you dieded");
+            other.GetComponent<EventManager>().CallTakeDamageEvent();
         }
     }
 }

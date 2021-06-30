@@ -27,19 +27,19 @@ namespace Luke
         }
 
         //private void OnEnable()
-        {
+        //{
             //health.DeathEvent += DestroyProtectionPoint;
-        }
+        //}
 
         //private void OnDisable()
-        {
+        //{
             //health.DeathEvent -= DestroyProtectionPoint;
-        }
+        //}
 
         //public void DestroyProtectionPoint()
-        {
+        //{
             //ProtectionPointDestroyedEvent?.Invoke();
             //Destroy(this);
-        }
+        //}
     }
 }

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+
 namespace Rob
 {
-    
-    [CustomEditor(typeof(Health), true)]
-    public class HealthEditor : Editor
-    {
 
-       
+    [CustomEditor(typeof(EventManager), true)]
+    public class EventManagerEditor : Editor
+    {
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
@@ -18,20 +17,16 @@ namespace Rob
 
             if (GUILayout.Button("Damage"))
             {
-                ((Health) target).DamageEventTaken(1f);
+                ((EventManager) target).CallTakeDamageEvent();
             }
 
             if (GUILayout.Button("Death"))
             {
                 
-                ((Health) target).Death();
+                ((EventManager) target).CallDeathEvent();
             }
             
             GUILayout.EndHorizontal();
         }
-
-
-
-
     }
 }
