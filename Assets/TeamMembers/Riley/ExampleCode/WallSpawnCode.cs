@@ -11,6 +11,7 @@ namespace RileyMcGowan
         
         //Public Vars
         public List<Vector3> sideDirections;
+        public LayerMask rayMask;
         
         void Start()
         {
@@ -27,7 +28,7 @@ namespace RileyMcGowan
             for (int i = 0; i < sideDirections.Count; i++)
             {
                 RaycastHit raycastHitInfo;
-                Physics.Raycast(transform.position, sideDirections[i], out raycastHitInfo);
+                Physics.Raycast(transform.position, sideDirections[i], out raycastHitInfo, 1, rayMask);
                 if (raycastHitInfo.distance < 1)
                 {
                     GameObject objectToReplace = raycastHitInfo.transform.gameObject;

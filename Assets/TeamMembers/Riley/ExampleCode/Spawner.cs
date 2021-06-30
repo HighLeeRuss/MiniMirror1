@@ -9,10 +9,12 @@ namespace RileyMcGowan
     {
         //Private Vars
         private List<GameObject> usedSpawnLocations;
+        private List<GameObject> specialObjectsSpawned;
         private int tilesCounter;
+        private NetworkManager networkManager;
         
         //Public Vars
-        public List<GameObject> locationsToSpawn;
+        public List<GameObject> specialObjectsToSpawn;
         public GameObject playerPrefab;
         public List<GameObject> spawnedTiles;
 
@@ -29,7 +31,7 @@ namespace RileyMcGowan
             {
                 return;
             }
-            
+            networkManager = FindObjectOfType<NetworkManager>().GetComponent<NetworkManager>();
             spawnedTiles = new List<GameObject>();
             if (spawnableTilesObjects != null) ///TILE SPAWNER///
             {
@@ -56,6 +58,12 @@ namespace RileyMcGowan
             {
                 Debug.LogWarning("The Spawner Has No Tiles");
             }
+
+            for (int i = 0; i < specialObjectsToSpawn.Count; i++)
+            {
+                Spawn(networkManager.GetStartPosition().position,specialObjectsToSpawn[i], specialObjectsSpawned);
+            }
+            
             //Player Spawn Code
             /*
              * GameObject spawnLocation = locationsToSpawn[Random.Range(0, locationsToSpawn.Count)];
