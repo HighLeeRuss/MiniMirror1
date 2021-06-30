@@ -61,7 +61,7 @@ namespace Rob
             base.Exit();
         }
 
-        public void TakeDamage()
+        public void TakeDamage(float damageAmount)
         {
             GetComponent<Health>().DamageTaken(5f);
         }
