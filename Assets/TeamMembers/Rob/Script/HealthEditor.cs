@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -9,6 +10,9 @@ namespace Rob
     [CustomEditor(typeof(Health), true)]
     public class HealthEditor : Editor
     {
+
+        public FireState fireState;
+        
 
         public override void OnInspectorGUI()
         {
@@ -22,7 +26,7 @@ namespace Rob
 
             if (GUILayout.Button("Death"))
             {
-                ((Health) target).Death();
+                fireState.Death();
             }
             
             GUILayout.EndHorizontal();
