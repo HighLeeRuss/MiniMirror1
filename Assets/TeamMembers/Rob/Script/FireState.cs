@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Epic.OnlineServices.AntiCheatServer;
 using UnityEngine;
 using Rob;
 
@@ -11,7 +12,8 @@ namespace Rob
     public class FireState : StateBase
     {
         private Renderer rend;
-        private int moistness; 
+        private int moistness;
+        public StateBase smokeState;
 
         public void OnEnable()
         {
@@ -37,6 +39,12 @@ namespace Rob
             base.Execute();
             Debug.Log("executing");
             rend.material.SetColor("Color", Color.red);
+            
+            if (moistness == 0)
+            {
+                //GetComponent<TileStateManager>().ChangeState(smokeState);
+            }
+            
         }
 
         public override void Exit()

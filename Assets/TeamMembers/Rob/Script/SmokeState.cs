@@ -11,7 +11,9 @@ namespace Rob
     
     {
         private Renderer rend;
-        
+        public StateBase fireState;
+        public StateBase waterState;
+        private int moistness;
 
         public void OnEnable()
         {
@@ -35,9 +37,17 @@ namespace Rob
             base.Execute();
 
             rend.material.SetColor("Color", Color.gray);
-
-            //if im smoking
-            rend.material.SetColor("Color", Color.grey);
+            
+            if (moistness == -1)
+            {
+                //GetComponent<TileStateManager>().ChangeState(waterState);
+            }
+           
+            if (moistness == 0)
+            {
+               //GetComponent<TileStateManager>().ChangeState(fireState);
+            }
+            
 
         }
 
