@@ -35,6 +35,10 @@ namespace RileyMcGowan
         {
             if (isLocalPlayer)
             {
+                if (rb == null && GetComponent<Rigidbody>() != null)
+                {
+                    rb = GetComponent<Rigidbody>();
+                }
                 if (rb.velocity.x < maxSpeed)
                 {
                     rb.AddRelativeForce(playerMoveVector.x * speed, 0, 0);
