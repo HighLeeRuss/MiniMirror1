@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  gameStateManager: {fileID: 0}
+  gameStateManager: {fileID: 8089397204926818894}
 --- !u!114 &8089397204926818894
 MonoBehaviour:
   m_ObjectHideFlags: 0

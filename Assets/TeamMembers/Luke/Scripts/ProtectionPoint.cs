@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,13 @@ namespace Luke
         // Update is called once per frame
         void Update()
         {
+            
+        }
 
+        public void OnCollisionEnter(Collision other)
+        {
+            //fire should hold damage amount
+            health.DamageTaken(1);
         }
     }
 }
