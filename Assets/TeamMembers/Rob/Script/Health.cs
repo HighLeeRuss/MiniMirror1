@@ -27,13 +27,15 @@ public class Health : MonoBehaviour
         
         if (currentHealth <= 0 )
         {
-            DeathEvent?.Invoke();
+            CallDeathEvent();
         }
     }
+    
 
-    private void OnTriggerEnter(Collider other)
+    public void CallDeathEvent()
     {
-        OnDamage?.Invoke(1f);
+        DeathEvent?.Invoke();
     }
+    
     
 }

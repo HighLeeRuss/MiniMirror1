@@ -24,13 +24,13 @@ namespace Rob
         public void OnEnable()
         {
             FindObjectOfType<Health>().DeathEvent += Death;
-            FindObjectOfType<Health>().OnDamage += TakeDamage;
+            
         }
 
         public void OnDisable()
         {
             FindObjectOfType<Health>().DeathEvent -= Death;
-            FindObjectOfType<Health>().OnDamage -= TakeDamage;
+            
         }
 
         public override void Enter()
@@ -61,10 +61,11 @@ namespace Rob
             base.Exit();
         }
 
-        public void TakeDamage(float damageAmount)
+        private void OnTriggerEnter(Collider other)
         {
-            GetComponent<Health>().DamageTaken(1f);
+            other.GetComponent<Health>().DamageTaken(1f);
         }
+        
 
         public void Death()
         {
