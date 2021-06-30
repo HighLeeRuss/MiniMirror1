@@ -38,12 +38,18 @@ namespace RileyMcGowan
                 if (rb.velocity.x < maxSpeed)
                 {
                     rb.AddRelativeForce(playerMoveVector.x * speed, 0, 0);
+                    //SendVelocity();
                 }
                 if (rb.velocity.z < maxSpeed)
                 {
                     rb.AddRelativeForce(0, 0, playerMoveVector.y * speed);
                 }
             }
+        }
+
+        void SendVelocity()
+        {
+            //cmdSendVelocity;
         }
     }
 }
