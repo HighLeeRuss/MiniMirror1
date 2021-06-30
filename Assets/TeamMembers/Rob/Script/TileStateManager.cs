@@ -29,5 +29,11 @@ namespace Rob
         {
             currentState?.Execute();
         }
+        
+        private void FixedUpdate()
+        {
+            //Remind what the current state is
+            UpdateCurrentState();
+        }
     }
 }

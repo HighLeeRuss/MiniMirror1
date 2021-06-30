@@ -21,8 +21,6 @@ namespace Rob
             if (GUILayout.Button("Force Enter"))
             {
                 ((StateBase) target).Enter();
-
-
             }
 
             //base.OnInspectorGUI();

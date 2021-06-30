@@ -15,15 +15,7 @@ namespace Rob
         public StateBase waterState;
         private int moistness;
 
-        public void OnEnable()
-        {
-            FindObjectOfType<Health>().TakeDamage += Damage;
-        }
-
-        public void OnDisable()
-        {
-            FindObjectOfType<Health>().TakeDamage -= Damage;
-        }
+        
         public override void Enter()
         {
             base.Enter();
@@ -56,9 +48,5 @@ namespace Rob
             base.Exit();
         }
         
-        void Damage()
-        {
-            //do damage things
-        }
     }
 }

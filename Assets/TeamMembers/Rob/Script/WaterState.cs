@@ -14,17 +14,8 @@ namespace Rob
         private Renderer rend;
         public StateBase smokeState;
         private int moistness;
-
-
-        public void OnEnable()
-        {
-            FindObjectOfType<Health>().TakeDamage += Damage;
-        }
-
-        public void OnDisable()
-        {
-            FindObjectOfType<Health>().TakeDamage -= Damage;
-        }
+        
+        
 
         public override void Enter()
         {
@@ -52,9 +43,6 @@ namespace Rob
             Debug.Log("we left");
         }
         
-        void Damage()
-        {
-            //do damage things
-        }
+        
     }
 }

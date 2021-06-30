@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Epic.OnlineServices.AntiCheatServer;
+using Epic.OnlineServices.Lobby;
+using Mirror.Examples.Pong;
 using UnityEngine;
 using Rob;
 
@@ -12,17 +14,19 @@ namespace Rob
     public class FireState : StateBase
     {
         private Renderer rend;
-        private int moistness;
         public StateBase smokeState;
+        public GameObject manageState;
+        private int moistness;
+        public event Action TakeDamageEvent;
 
         public void OnEnable()
         {
-            FindObjectOfType<Health>().TakeDamage += Damage;
+            FindObjectOfType<Health>().DeathEvent += Death;
         }
 
         public void OnDisable()
         {
-            FindObjectOfType<Health>().TakeDamage -= Damage;
+            FindObjectOfType<Health>().DeathEvent -= Death;
         }
 
         public override void Enter()
@@ -30,8 +34,8 @@ namespace Rob
             base.Enter();
             Debug.Log("Entered");
             rend = GetComponent<Renderer>(); //getting the renderer of the tile
-            
-            
+
+
         }
 
         public override void Execute()
@@ -45,6 +49,7 @@ namespace Rob
                 //GetComponent<TileStateManager>().ChangeState(smokeState);
             }
             
+
         }
 
         public override void Exit()
@@ -52,11 +57,16 @@ namespace Rob
             base.Exit();
         }
 
-        public void Damage()
+
+      private void OnTriggerEnter(Collider col)
+      
+      {
+          TakeDamageEvent?.Invoke();
+      }
+
+        public void Death()
         {
-            //do damage things
-            Debug.Log("Damaged, ouch");
+           Destroy(gameObject); 
         }
-        
     }
 }

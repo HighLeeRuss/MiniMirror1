@@ -10,11 +10,7 @@ namespace Rob
 
         //[Serializable]
     public class StateBase : MonoBehaviour
-    { 
-            
-        //public Action Enter;
-        //public Action Execute;
-        //public Action Exit;
+    {
         public bool active;
 
         public virtual void Enter()
