@@ -7,14 +7,17 @@ namespace RileyMcGowan
 {
     public class Spawner : NetworkBehaviour
     {
-        private List<GameObject> spawnedTiles;
+        //Private Vars
         private List<GameObject> usedSpawnLocations;
         private int tilesCounter;
+        
+        //Public Vars
+        public List<GameObject> locationsToSpawn;
+        public GameObject playerPrefab;
+        public List<GameObject> spawnedTiles;
 
         [Tooltip("Tiles to spawn")] 
         public GameObject[] spawnableTilesObjects;
-        public List<GameObject> locationsToSpawn;
-        public GameObject playerPrefab;
         
         [Tooltip("How many tiles to spawn")]
         public Vector2 gridTileSpawn;
@@ -61,7 +64,7 @@ namespace RileyMcGowan
              */
         }
 
-        private void Spawn(Vector3 locationToSpawn, GameObject objectToSpawn, List<GameObject> storeSpawnedObject)
+        public void Spawn(Vector3 locationToSpawn, GameObject objectToSpawn, List<GameObject> storeSpawnedObject)
         {
             GameObject spawnedObject = Instantiate(objectToSpawn, locationToSpawn, Quaternion.identity);
             NetworkServer.Spawn(spawnedObject);
