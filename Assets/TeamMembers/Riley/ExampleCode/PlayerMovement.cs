@@ -33,16 +33,17 @@ namespace RileyMcGowan
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (rb.velocity.x < maxSpeed)
+            if (isLocalPlayer)
             {
-                rb.AddRelativeForce(playerMoveVector.x * speed, 0, 0);
-            }
-            if (rb.velocity.z < maxSpeed)
-            {
-                rb.AddRelativeForce(0, 0, playerMoveVector.y * speed);
+                if (rb.velocity.x < maxSpeed)
+                {
+                    rb.AddRelativeForce(playerMoveVector.x * speed, 0, 0);
+                }
+                if (rb.velocity.z < maxSpeed)
+                {
+                    rb.AddRelativeForce(0, 0, playerMoveVector.y * speed);
+                }
             }
         }
-
-
     }
 }
