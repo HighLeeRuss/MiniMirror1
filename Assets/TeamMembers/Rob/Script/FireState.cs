@@ -63,12 +63,13 @@ namespace Rob
 
         public void TakeDamage(float damageAmount)
         {
-            GetComponent<Health>().DamageTaken(5f);
+            GetComponent<Health>().DamageTaken(1f);
         }
 
         public void Death()
         {
-           Destroy(gameObject); 
+            //destroy the player
+            Debug.Log("you dieded");
         }
     }
 }

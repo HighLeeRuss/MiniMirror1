@@ -18,7 +18,13 @@ public class Health : MonoBehaviour
     public void DamageTaken(float damageAmount)
     {
         currentHealth -= damageAmount;
-        Debug.Log("Damaged");
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+        }
+        
+        Debug.Log("Damaged current health is now " + currentHealth);
+        
         if (currentHealth <= 0 )
         {
             DeathEvent?.Invoke();
@@ -27,7 +33,11 @@ public class Health : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //check if player is standing in fire
-        OnDamage?.Invoke(5f);
+        OnDamage?.Invoke(1f);
+    }
+
+    public void Death()
+    {
+        Debug.Log("Died");
     }
 }
