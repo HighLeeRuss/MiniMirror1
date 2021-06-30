@@ -15,18 +15,22 @@ namespace Rob
     {
         private Renderer rend;
         public StateBase smokeState;
-        public GameObject manageState;
         private int moistness;
-        public event Action TakeDamageEvent;
+
+
+        
+        
 
         public void OnEnable()
         {
             FindObjectOfType<Health>().DeathEvent += Death;
+            FindObjectOfType<Health>().OnDamage += TakeDamage;
         }
 
         public void OnDisable()
         {
             FindObjectOfType<Health>().DeathEvent -= Death;
+            FindObjectOfType<Health>().OnDamage -= TakeDamage;
         }
 
         public override void Enter()
@@ -46,7 +50,7 @@ namespace Rob
             
             if (moistness == 0)
             {
-                //GetComponent<TileStateManager>().ChangeState(smokeState);
+                GetComponent<TileStateManager>().ChangeState(smokeState);
             }
             
 
@@ -57,12 +61,10 @@ namespace Rob
             base.Exit();
         }
 
-
-      private void OnTriggerEnter(Collider col)
-      
-      {
-          TakeDamageEvent?.Invoke();
-      }
+        public void TakeDamage(float damageAmount)
+        {
+            GetComponent<Health>().DamageTaken(5f);
+        }
 
         public void Death()
         {

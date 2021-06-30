@@ -8,33 +8,26 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    public float health;
-    public float damageAmount;
-    
+    public float currentHealth;
+
     public event Action DeathEvent;
+    public delegate void TakeDamage(float damageAmount);
+    public event TakeDamage OnDamage;
 
 
-    
-
-    public void OnEnable()
+    public void DamageTaken(float damageAmount)
     {
-        FindObjectOfType<FireState>().TakeDamageEvent += TakeDamage;
-    }
-
-    public void OnDisable()
-    {
-        FindObjectOfType<FireState>().TakeDamageEvent -= TakeDamage;
-    }
-    
-    
-    public void TakeDamage()
-    {
-        health -= damageAmount;
+        currentHealth -= damageAmount;
         Debug.Log("Damaged");
-        if (health <= 0 )
+        if (currentHealth <= 0 )
         {
             DeathEvent?.Invoke();
         }
-        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        //check if player is standing in fire
+        OnDamage?.Invoke(5f);
     }
 }

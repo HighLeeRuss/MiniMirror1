@@ -32,7 +32,7 @@ namespace Rob
             
             if (moistness == 0)
             {
-                //GetComponent<TileStateManager>().ChangeState(smokeState);
+                GetComponent<TileStateManager>().ChangeState(smokeState);
             }
             
         }

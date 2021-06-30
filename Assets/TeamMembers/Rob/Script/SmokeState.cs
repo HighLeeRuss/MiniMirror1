@@ -32,12 +32,12 @@ namespace Rob
             
             if (moistness == -1)
             {
-                //GetComponent<TileStateManager>().ChangeState(waterState);
+                GetComponent<TileStateManager>().ChangeState(waterState);
             }
            
             if (moistness == 0)
             {
-               //GetComponent<TileStateManager>().ChangeState(fireState);
+               GetComponent<TileStateManager>().ChangeState(fireState);
             }
             
 
