@@ -13,7 +13,8 @@ namespace Rob
         private Renderer rend;
         public StateBase fireState;
         public StateBase waterState;
-        private int moistness;
+        
+        
 
         
         public override void Enter()
@@ -21,6 +22,7 @@ namespace Rob
             base.Enter();
             Debug.Log("Entered");
             rend = GetComponent<Renderer>(); //getting the renderer of the tile
+            
 
         }
 
@@ -30,14 +32,14 @@ namespace Rob
 
             rend.material.SetColor("Color", Color.gray);
             
-            if (moistness == -1)
+            if (GetComponent<StateCounter>().counter >= 0.7f)
             {
-                GetComponent<TileStateManager>().ChangeState(waterState);
+                GetComponent<TileStateManager>().ChangeState(fireState);
             }
            
-            if (moistness == 0)
+            if ( GetComponent<StateCounter>().counter <= -0.7f)
             {
-               GetComponent<TileStateManager>().ChangeState(fireState);
+               GetComponent<TileStateManager>().ChangeState(waterState);
             }
             
 

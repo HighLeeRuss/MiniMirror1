@@ -48,7 +48,7 @@ namespace Rob
             Debug.Log("executing");
             rend.material.SetColor("Color", Color.red);
             
-            if (moistness == 0)
+            if (GetComponent<StateCounter>().counter <= 0.5f)
             {
                 GetComponent<TileStateManager>().ChangeState(smokeState);
             }
