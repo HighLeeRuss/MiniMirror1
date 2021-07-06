@@ -37,9 +37,9 @@ public class StateCounter : MonoBehaviour
         {
             counterTime = 0f;
             counter += 0.1f;
-            if (counter >= 1)
+            if (counter >= 1f)
             {
-                counter = 1;
+                counter = 1f;
             }
         }
     }
@@ -52,9 +52,9 @@ public class StateCounter : MonoBehaviour
         {
             counterTime = 0f;
             counter -= 0.1f;
-            if (counter <= -1)
+            if (counter <= -1f)
             {
-                counter = -1;
+                counter = -1f;
             }
         }
     }
