@@ -15,10 +15,6 @@ public class StateCounter : MonoBehaviour
     public float delay;
     public float counter;
 
-    public StateBase fireState;
-    public StateBase smokeState;
-    public StateBase waterState;
-
 
     private void Update()
     {
