@@ -11,8 +11,9 @@ namespace Luke
     {
 
         //References
-        public GameStateManager gameStateManager;
+        private GameStateManager gameStateManager;
         public Timer timer;
+        public List<GameObject> players;
 
         //Events
         public event Action ResetLevelEvent;
@@ -27,7 +28,8 @@ namespace Luke
         public override void OnStartServer()
         {
             base.OnStartServer();
-            
+
+            gameStateManager = GetComponent<GameStateManager>();
             timer.TimerEndEvent += CmdRequestGameLoss;
         }
 

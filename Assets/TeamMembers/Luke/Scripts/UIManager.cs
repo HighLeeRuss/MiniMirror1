@@ -15,6 +15,8 @@ namespace Luke
         public Timer timer;
         public Health playerhealth;
         public Health protectionPointHealth;
+        public Slider playerHealthBar;
+        public Slider protectionPointHealthBar;
 
         //variables
         public TextMeshProUGUI timerText;
