@@ -12,6 +12,7 @@ namespace Luke
 
         //References
         private GameStateManager gameStateManager;
+        public CustomNetworkManager networkMan;
         public Timer timer;
         public List<GameObject> players;
         public Camera camera;
@@ -88,6 +89,7 @@ namespace Luke
         {
             StartLevelEvent?.Invoke();
             gameStateManager.stateManager.ChangeState(gameStateManager.startOfGame);
+            networkMan.OnServerAddPlayer();
         }
 
         /// <summary>
@@ -121,7 +123,7 @@ namespace Luke
             GameWonEvent?.Invoke();
             gameStateManager.stateManager.ChangeState(gameStateManager.endOfGame);
         }
-
+        
         public void SpawnHealthBars()
         {
             

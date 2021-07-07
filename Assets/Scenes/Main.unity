@@ -234,6 +234,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 3687977235745447817, guid: 3141fc1c77617864aa5c1a7c8c7bf18e,
         type: 3}
+      propertyPath: autoCreatePlayer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3687977235745447817, guid: 3141fc1c77617864aa5c1a7c8c7bf18e,
+        type: 3}
       propertyPath: spawnPrefabs.Array.size
       value: 5
       objectReference: {fileID: 0}

@@ -13,11 +13,11 @@ public class CustomNetworkManager : NetworkManager
     public override void OnStartClient()
     {
         base.OnStartClient();
-    }*/
-    /*public virtual void OnServerAddPlayer(NetworkConnection conn, short playerControlID)
+    }
+    public virtual void OnServerAddPlayer(NetworkConnection conn = default (NetworkConnection))
     {
         base.OnServerAddPlayer(conn);
         var playerSpawned = (GameObject)GameObject.Instantiate(playerPrefab, GetStartPosition().position, Quaternion.identity);
-        NetworkServer.AddPlayerForConnection(conn, playerSpawned, playerControlID);
+        NetworkServer.AddPlayerForConnection(conn, playerSpawned);
     }*/
 }
