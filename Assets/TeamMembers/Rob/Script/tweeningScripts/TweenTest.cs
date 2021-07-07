@@ -11,15 +11,27 @@ public class TweenTest : MonoBehaviour
      public float target;
      public float duration;
      private Vector3 ok;
+     private Renderer rend;
+     public CanvasGroup cg;
+
+     private void Awake()
+     {
+          GetComponent<CanvasGroup>().alpha = 0;
+     }
 
      private void Start()
      {
           ok = new Vector3(2,2,2);
-          //DOTween.To(Getter, Setter, target, duration).SetEase(Ease.OutBounce).onComplete(Finish);
+          DOTween.To(Getter, Setter, target, duration).SetEase(Ease.OutBounce);
           //duration += Time.deltaTime;
-          DOTween.To(JustASetter, 0, 1, duration);
-          transform.DOMove(ok, 1, true);
+          //DOTween.To(JustASetter, 0, 1, duration);
+          //transform.DOMove(ok, 1, true);
           transform.DOShakePosition(5, 1, 1000, 1000, true, true);
+          //rend = GetComponent<Renderer>();
+
+          GetComponent<CanvasGroup>().DOFade(1, 5f);
+          
+
      }
      
      private void JustASetter(float newvalue)
@@ -44,7 +56,9 @@ public class TweenTest : MonoBehaviour
      {
           // This only runs when the tween animated value is finished
           print("hi");
+          
      }
+     
 
 
 }
