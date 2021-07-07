@@ -8,11 +8,11 @@ namespace RileyMcGowan
     {
         //Private Vars
         private Spawner mainSpawner;
-        
+
         //Public Vars
         public List<Vector3> sideDirections;
         public LayerMask rayMask;
-        
+
         void Start()
         {
             mainSpawner = FindObjectOfType<Spawner>().GetComponent<Spawner>();
@@ -28,14 +28,19 @@ namespace RileyMcGowan
             for (int i = 0; i < sideDirections.Count; i++)
             {
                 RaycastHit raycastHitInfo;
-                Physics.Raycast(transform.position, sideDirections[i], out raycastHitInfo, 1, rayMask);
-                if (raycastHitInfo.distance < 1)
+                if (Physics.Raycast(transform.position, sideDirections[i], out raycastHitInfo, 1, rayMask))
                 {
-                    GameObject objectToReplace = raycastHitInfo.transform.gameObject;
-                    Vector3 locationToSpawnTemp = new Vector3(objectToReplace.transform.position.x, 0, objectToReplace.transform.position.z);
-                    mainSpawner.Spawn(locationToSpawnTemp, mainSpawner.spawnableTilesObjects[Random.Range(0, mainSpawner.spawnableTilesObjects.Length)], mainSpawner.spawnedTiles);
-                    mainSpawner.spawnedTiles.Remove(objectToReplace);
-                    Destroy(objectToReplace);
+                    if (raycastHitInfo.distance < 1)
+                    {
+                        GameObject objectToReplace = raycastHitInfo.transform.gameObject;
+                        Vector3 locationToSpawnTemp = new Vector3(objectToReplace.transform.position.x, 0,
+                            objectToReplace.transform.position.z);
+                        mainSpawner.Spawn(locationToSpawnTemp,
+                            mainSpawner.spawnableTilesObjects
+                                [Random.Range(0, mainSpawner.spawnableTilesObjects.Length)], mainSpawner.spawnedTiles);
+                        mainSpawner.spawnedTiles.Remove(objectToReplace);
+                        Destroy(objectToReplace);
+                    }
                 }
             }
         }
