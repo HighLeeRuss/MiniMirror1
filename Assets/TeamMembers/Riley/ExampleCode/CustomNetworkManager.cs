@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class CustomNetworkManager : NetworkManager
 {
-    public override void OnServerAddPlayer(NetworkConnection conn)
+    /*public override void OnStartServer()
     {
-        base.OnServerAddPlayer(conn);
+        base.OnStartServer();
     }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+    }*/
 }
