@@ -24,9 +24,9 @@ namespace RileyMcGowan
         [Tooltip("How many tiles to spawn")]
         public Vector2 gridTileSpawn;
         
-        public override void OnStartServer()
+        
+        public void SpawnScene()
         {
-            base.OnStartServer();
             if (isServer == false)
             {
                 return;
