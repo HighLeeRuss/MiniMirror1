@@ -46,7 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
-  gameStateManager: {fileID: 2805828571898123043}
+  timer: {fileID: 0}
+  players: []
+  camera: {fileID: 0}
 --- !u!114 &2805828571898123043
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ namespace Luke
         private GameStateManager gameStateManager;
         public Timer timer;
         public List<GameObject> players;
+        public Camera camera;
 
         //Events
         public event Action ResetLevelEvent;
@@ -28,7 +29,7 @@ namespace Luke
         public override void OnStartServer()
         {
             base.OnStartServer();
-
+            
             gameStateManager = GetComponent<GameStateManager>();
             timer.TimerEndEvent += CmdRequestGameLoss;
         }
@@ -48,6 +49,7 @@ namespace Luke
         {
             RpcResetLevel();
         }
+        
         [ClientRpc]
         public void RpcResetLevel()
         {
@@ -115,6 +117,11 @@ namespace Luke
         {
             GameWonEvent?.Invoke();
             gameStateManager.stateManager.ChangeState(gameStateManager.endOfGame);
+        }
+
+        public void SpawnHealthBars()
+        {
+            
         }
     }
 }

@@ -13,10 +13,6 @@ namespace Luke
     {
         //References
         public Timer timer;
-        public Health playerhealth;
-        public Health protectionPointHealth;
-        public Slider playerHealthBar;
-        public Slider protectionPointHealthBar;
 
         //variables
         public TextMeshProUGUI timerText;
@@ -33,11 +29,6 @@ namespace Luke
             PrintTimer();
         }
 
-        public void ShowHealthBar()
-        {
-            
-        }
-        
         public void PrintTimer()
         {
             // on the left 0 for the minutes and right of the colon is 1 for seconds

@@ -376,7 +376,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef46e51235dd3434da8d873e503716f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
   timer: {fileID: 2367462212508460856}
   timerText: {fileID: 2367462213110944475}
