@@ -15,6 +15,7 @@ namespace Luke
         public Timer timer;
         public List<GameObject> players;
         public Camera camera;
+        public Spawner spawner;
 
         //Events
         public event Action ResetLevelEvent;
@@ -63,6 +64,7 @@ namespace Luke
         public void CmdRequestLoadLevel()
         {
             RpcLoadLevel();
+            spawner.SpawnScene();
         }
 
         [ClientRpc]
@@ -78,6 +80,7 @@ namespace Luke
         public void CmdRequestStartLevel()
         {
             RpcStartLevel();
+            
         }
         
         [ClientRpc]
