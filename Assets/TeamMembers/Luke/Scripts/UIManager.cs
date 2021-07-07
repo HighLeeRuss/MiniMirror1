@@ -13,7 +13,8 @@ namespace Luke
     {
         //References
         public Timer timer;
-        public Health health;
+        public Health playerhealth;
+        public Health protectionPointHealth;
 
         //variables
         public TextMeshProUGUI timerText;
