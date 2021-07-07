@@ -43,8 +43,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f818e056c0c2c7240a746ceb822d5a6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  specialObjectsToSpawn:
+  - {fileID: 6084905142772319478, guid: 68d8672e3fba1fd4fa0d375e335e6a91, type: 3}
+  playerPrefab: {fileID: 0}
+  spawnedTiles: []
   spawnableTilesObjects:
+  - {fileID: 2543719809092828756, guid: 715ba4e0ce9b6d8449b9d6d5dc811b4e, type: 3}
+  - {fileID: 7714076058715548928, guid: 56da558041982df4887143fe3626ec0b, type: 3}
+  - {fileID: 7714076058715548928, guid: 56da558041982df4887143fe3626ec0b, type: 3}
   - {fileID: 8059911068315229969, guid: d3c22faaa36df2d44b6cfe78ed733411, type: 3}
-  locationsToSpawn:
-  - {fileID: 0}
-  gridTileSpawn: {x: 5, y: 4}
+  - {fileID: 8059911068315229969, guid: d3c22faaa36df2d44b6cfe78ed733411, type: 3}
+  - {fileID: 8059911068315229969, guid: d3c22faaa36df2d44b6cfe78ed733411, type: 3}
+  gridTileSpawn: {x: 30, y: 30}
