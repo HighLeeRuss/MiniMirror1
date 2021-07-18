@@ -23,8 +23,8 @@ namespace Rob
 
             if (GUILayout.Button("Death"))
             {
-                
-                ((Health) target).Death();
+
+                ((EventManager) target).CallDeathEvent();
             }
             
             GUILayout.EndHorizontal();

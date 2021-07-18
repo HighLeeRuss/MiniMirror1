@@ -19,13 +19,11 @@ namespace Rob
         public void CallDeathEvent()
         {
             DeathEvent?.Invoke();
-            Debug.Log("died");
         }
 
         public void CallTakeDamageEvent()
         {
             OnDamageEvent?.Invoke(1f);
-            Debug.Log("dealt Damage ");
         }
     }
 }
