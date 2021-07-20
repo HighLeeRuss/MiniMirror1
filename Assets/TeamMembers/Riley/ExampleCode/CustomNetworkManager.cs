@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CustomNetworkManager : NetworkManager
 {
-    /*public override void OnStartServer()
+    public override void OnStartServer()
     {
         base.OnStartServer();
     }
@@ -19,5 +19,5 @@ public class CustomNetworkManager : NetworkManager
         base.OnServerAddPlayer(conn);
         var playerSpawned = (GameObject)GameObject.Instantiate(playerPrefab, GetStartPosition().position, Quaternion.identity);
         NetworkServer.AddPlayerForConnection(conn, playerSpawned);
-    }*/
+    }
 }

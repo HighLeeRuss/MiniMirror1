@@ -9,7 +9,6 @@ namespace Luke
 {
     public class GameManager : NetworkBehaviour
     {
-
         //References
         private GameStateManager gameStateManager;
         public CustomNetworkManager networkMan;
@@ -89,7 +88,8 @@ namespace Luke
         {
             StartLevelEvent?.Invoke();
             gameStateManager.stateManager.ChangeState(gameStateManager.startOfGame);
-            //networkMan.OnServerAddPlayer();
+            //Spawning player
+            //networkMan.OnServerAddPlayer(NetworkConnection conn = default (NetworkConnection));
         }
 
         /// <summary>
