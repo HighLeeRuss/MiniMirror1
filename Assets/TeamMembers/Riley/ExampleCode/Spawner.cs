@@ -78,5 +78,17 @@ namespace RileyMcGowan
             NetworkServer.Spawn(spawnedObject);
             storeSpawnedObject.Add(spawnedObject);
         }
+
+        public void RemoveScene()
+        {
+            for (int i = 0; i < spawnedTiles.Count; i++)
+            {
+                Destroy(spawnedTiles[i]);
+            }
+            for (int i = 0; i < specialObjectsSpawned.Count; i++)
+            {
+                Destroy(specialObjectsSpawned[i]);
+            }
+        }
     }
 }
