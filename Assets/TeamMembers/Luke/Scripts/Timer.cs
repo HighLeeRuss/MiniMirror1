@@ -124,7 +124,6 @@ namespace Luke
             {
                 gameManager.StartLevelEvent -= CmdRequestStartTime;
             }
-            
         }
     }
 }

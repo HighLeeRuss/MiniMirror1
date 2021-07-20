@@ -89,7 +89,7 @@ namespace Luke
         {
             StartLevelEvent?.Invoke();
             gameStateManager.stateManager.ChangeState(gameStateManager.startOfGame);
-            networkMan.OnServerAddPlayer();
+            //networkMan.OnServerAddPlayer();
         }
 
         /// <summary>
