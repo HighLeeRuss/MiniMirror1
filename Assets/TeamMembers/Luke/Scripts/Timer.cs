@@ -24,12 +24,6 @@ namespace Luke
         //events
         public event Action TimerEndEvent;
 
-        // Start is called before the first frame update
-        void Start()
-        {
-            
-        }
-
         // Update is called once per frame
         void Update()
         {
@@ -98,7 +92,7 @@ namespace Luke
         
 
         /// <summary>
-        /// if we want to pause game
+        /// if we want to pause game would be useful to have this
         /// </summary>
         public void PauseTime()
         {

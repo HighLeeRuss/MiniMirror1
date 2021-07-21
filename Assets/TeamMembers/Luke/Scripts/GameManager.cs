@@ -13,7 +13,6 @@ namespace Luke
         private GameStateManager gameStateManager;
         public CustomNetworkManager networkMan;
         public Timer timer;
-        public List<GameObject> players;
         public Camera camera;
         public Spawner spawner;
 
@@ -25,7 +24,7 @@ namespace Luke
         public event Action GameWonEvent;
 
         //Variables
-
+        public List<GameObject> players;
 
         public override void OnStartServer()
         {
@@ -58,7 +57,7 @@ namespace Luke
         }
 
         /// <summary>
-        /// Send event to setup of level before we start the game. Tell fire to do its thing + spawning positions and any PowerUps???
+        /// Send event to setup of level before we start the game. Set up tiles, spawning positions and any PowerUps???
         /// </summary>
         [Command(requiresAuthority = false)]
         public void CmdRequestLoadLevel()
@@ -87,7 +86,8 @@ namespace Luke
         {
             StartLevelEvent?.Invoke();
             gameStateManager.stateManager.ChangeState(gameStateManager.startOfGame);
-            //Spawning player
+            //Spawning player + protection points
+            
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace Luke
         }
 
         /// <summary>
-        /// Send event to bring up end game screen and show finish time??? check collective tiles in scene +  event from timer???
+        /// Send event to bring up end game screen and show finish time??? check collective tiles in scene + event from timer???
         /// </summary>
         [Command(requiresAuthority = false)]
         public void CmdRequestGameWon()

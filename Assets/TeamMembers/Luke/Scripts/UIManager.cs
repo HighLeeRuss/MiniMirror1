@@ -29,6 +29,7 @@ namespace Luke
             PrintTimer();
         }
 
+        /// Timer visuals only
         public void PrintTimer()
         {
             // on the left 0 for the minutes and right of the colon is 1 for seconds

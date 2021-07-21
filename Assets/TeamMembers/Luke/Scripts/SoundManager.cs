@@ -14,18 +14,6 @@ namespace Luke
 
         //Variables
 
-        // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         public override void OnStartServer()
         {
             base.OnStartServer();
@@ -36,6 +24,17 @@ namespace Luke
             }
         }
 
+        public override void OnStopServer()
+        {
+            base.OnStopServer();
+
+            if (isServer)
+            {
+                gameManager.StartLevelEvent -= RpcStartMusic;
+            }
+        }
+
+        //TODO find some actual music
         [ClientRpc]
         public void RpcStartMusic()
         {
