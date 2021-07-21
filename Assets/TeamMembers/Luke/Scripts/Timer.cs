@@ -13,7 +13,6 @@ namespace Luke
         public GameManager gameManager;
 
         //variables
-        [SyncVar]
         public float currentTime;
         public float maxTime;
         public bool timeStarted;

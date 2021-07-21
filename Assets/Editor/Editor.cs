@@ -5,38 +5,41 @@ using UnityEditor;
 using UnityEditor.Experimental.TerrainAPI;
 using UnityEngine;
 
-[CustomEditor(typeof(GameManager))]
-public class Editor : UnityEditor.Editor
+namespace Luke
 {
-    
-    public override void OnInspectorGUI()
+    [CustomEditor(typeof(GameManager))]
+    public class Editor : UnityEditor.Editor
     {
-        base.OnInspectorGUI();
-        GameManager gameManager = (GameManager) target;
 
-        if (GUILayout.Button("Level Reset"))
+        public override void OnInspectorGUI()
         {
-            gameManager.CmdRequestResetLevel();
-        }
+            base.OnInspectorGUI();
+            GameManager gameManager = (GameManager) target;
 
-        if (GUILayout.Button("Load Level"))
-        {
-            gameManager.CmdRequestLoadLevel();
-        }
-        
-        if (GUILayout.Button("Start Level"))
-        {
-            gameManager.CmdRequestStartLevel();
-        }
+            if (GUILayout.Button("Level Reset"))
+            {
+                gameManager.CmdRequestResetLevel();
+            }
 
-        if (GUILayout.Button("Lose Level"))
-        {
-            gameManager.CmdRequestGameLoss();
-        }
+            if (GUILayout.Button("Load Level"))
+            {
+                gameManager.CmdRequestLoadLevel();
+            }
 
-        if (GUILayout.Button("Win Level"))
-        {
-            gameManager.CmdRequestGameWon();
+            if (GUILayout.Button("Start Level"))
+            {
+                gameManager.CmdRequestStartLevel();
+            }
+
+            if (GUILayout.Button("Lose Level"))
+            {
+                gameManager.CmdRequestGameLoss();
+            }
+
+            if (GUILayout.Button("Win Level"))
+            {
+                gameManager.CmdRequestGameWon();
+            }
         }
     }
 }

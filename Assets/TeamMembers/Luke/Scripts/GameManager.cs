@@ -30,7 +30,6 @@ namespace Luke
         public override void OnStartServer()
         {
             base.OnStartServer();
-            
             gameStateManager = GetComponent<GameStateManager>();
             timer.TimerEndEvent += CmdRequestGameLoss;
         }
@@ -55,6 +54,7 @@ namespace Luke
         public void RpcResetLevel()
         {
             ResetLevelEvent?.Invoke();
+            spawner.RemoveScene();
         }
 
         /// <summary>
@@ -64,13 +64,13 @@ namespace Luke
         public void CmdRequestLoadLevel()
         {
             RpcLoadLevel();
-            spawner.SpawnScene();
         }
 
         [ClientRpc]
         public void RpcLoadLevel()
         {
             LoadLevelEvent?.Invoke();
+            spawner.SpawnScene();
         }
 
         /// <summary>
@@ -80,7 +80,6 @@ namespace Luke
         public void CmdRequestStartLevel()
         {
             RpcStartLevel();
-            
         }
         
         [ClientRpc]
@@ -89,7 +88,6 @@ namespace Luke
             StartLevelEvent?.Invoke();
             gameStateManager.stateManager.ChangeState(gameStateManager.startOfGame);
             //Spawning player
-            //networkMan.OnServerAddPlayer(NetworkConnection conn = default (NetworkConnection));
         }
 
         /// <summary>
