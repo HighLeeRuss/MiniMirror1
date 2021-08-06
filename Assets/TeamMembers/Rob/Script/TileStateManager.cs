@@ -88,7 +88,7 @@ namespace Rob
         /// <summary>
         /// CounterLimits
         /// </summary>
-        private float Counter
+        public float Counter
         {
             get
             {
