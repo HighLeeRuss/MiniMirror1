@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Mirror;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace RileyMcGowan
 {
@@ -12,19 +14,25 @@ namespace RileyMcGowan
         private List<GameObject> specialObjectsSpawned;
         private int tilesCounter;
         private NetworkManager networkManager;
+        private Vector2 compairSpecialSpawn;
         
         //Public Vars
         public List<GameObject> specialObjectsToSpawn;
         public GameObject playerPrefab;
         public List<GameObject> spawnedTiles;
+        public GameObject fireTile;
 
         [Tooltip("Tiles to spawn")] 
         public GameObject[] spawnableTilesObjects;
         
         [Tooltip("How many tiles to spawn")]
         public Vector2 gridTileSpawn;
-        
-        
+
+        private void Start()
+        {
+            SpawnScene();
+        }
+
         public void SpawnScene()
         {
             if (isServer == false)
@@ -47,10 +55,20 @@ namespace RileyMcGowan
                     //Spawn the y grid
                     for (int j = 0; j < gridTileSpawn.y - 1; j++)
                     {
-                        int randomNumberJ = Random.Range(0, spawnableTilesObjects.Length);
-                        GameObject tempSpawnObjectJ = spawnableTilesObjects[randomNumberJ];
-                        Vector3 spawnLocationJ = new Vector3(i, 0, j + 1);
-                        Spawn(spawnLocationJ, tempSpawnObjectJ, spawnedTiles);
+                        Vector2 roundInt = new Vector2(Mathf.Round(gridTileSpawn.x / 2), Mathf.Round(gridTileSpawn.y / 4));
+                        compairSpecialSpawn = new Vector2(i, j);
+                        if (compairSpecialSpawn == roundInt)
+                        {
+                            Vector3 spawnLocationJ = new Vector3(i, 0, j + 1);
+                            Spawn(spawnLocationJ, fireTile, spawnedTiles);
+                        }
+                        else
+                        {
+                            int randomNumberJ = Random.Range(0, spawnableTilesObjects.Length);
+                            GameObject tempSpawnObjectJ = spawnableTilesObjects[randomNumberJ];
+                            Vector3 spawnLocationJ = new Vector3(i, 0, j + 1);
+                            Spawn(spawnLocationJ, tempSpawnObjectJ, spawnedTiles);
+                        }
                     }
                 }
             }
@@ -72,7 +90,7 @@ namespace RileyMcGowan
              */
         }
 
-        public void Spawn(Vector3 locationToSpawn, GameObject objectToSpawn, List<GameObject> storeSpawnedObject)
+        public void Spawn(Vector3 locationToSpawn, GameObject objectToSpawn, List<GameObject> storeSpawnedObject = default(List<GameObject>))
         {
             GameObject spawnedObject = Instantiate(objectToSpawn, locationToSpawn, Quaternion.identity);
             NetworkServer.Spawn(spawnedObject);
