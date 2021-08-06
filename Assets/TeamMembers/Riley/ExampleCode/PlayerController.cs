@@ -6,8 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace RileyMcGowan
 {
-
-    public class PlayerMovement : NetworkBehaviour
+    public class PlayerController : NetworkBehaviour
     {
         private PlayerInputBasic playerControlls; //Make a player controller for this player
         private Rigidbody rb;
@@ -48,6 +47,7 @@ namespace RileyMcGowan
                 {
                     rb.AddRelativeForce(0, 0, playerMoveVector.y * speed);
                 }
+                transform.LookAt(new Vector3(Input.mousePosition.x, gameObject.transform.position.y, Input.mousePosition.z));
             }
         }
 
