@@ -16,30 +16,24 @@ namespace Rob
         private Renderer rend;
         public StateBase smokeState;
         private int moistness;
+        //private TileStateManager tileStateManagerRef;
 
+        /*public void OnEnable()
+        {
+            FindObjectOfType<EventManager>().OnDamageEvent += DealDamage;
+        }
 
-        
-        
-
-       // public void OnEnable()
-       // {
-       //     FindObjectOfType<EventManager>().OnDamageEvent += DealDamage;
-       //     
-       // }
-//
-       // public void OnDisable()
-       // {
-       //     FindObjectOfType<EventManager>().OnDamageEvent -= DealDamage;
-       //     
-       // }
+        public void OnDisable()
+        {
+            FindObjectOfType<EventManager>().OnDamageEvent -= DealDamage;
+        }*/
 
         public override void Enter()
         {
             base.Enter();
             Debug.Log("Entered");
             rend = GetComponent<Renderer>(); //getting the renderer of the tile
-
-
+            //tileStateManagerRef = GetComponent<TileStateManager>();
         }
 
         public override void Execute()
@@ -47,13 +41,10 @@ namespace Rob
             base.Execute();
             Debug.Log("executing");
             rend.material.SetColor("Color", Color.red);
-            
-            if (GetComponent<StateCounter>().counter <= 0.5f)
+            /*if (tileStateManagerRef.counter <= 0.5f)
             {
-                GetComponent<TileStateManager>().ChangeState(smokeState);
-            }
-            
-
+                tileStateManagerRef.ChangeState(smokeState);
+            }*/
         }
 
         public override void Exit()

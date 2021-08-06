@@ -7,42 +7,32 @@ using Rob;
 namespace Rob
 {
     public class SmokeState : StateBase
-    
-    
     {
         private Renderer rend;
         public StateBase fireState;
         public StateBase waterState;
-        
-        
-
+        //private TileStateManager tileStateManagerRef;
         
         public override void Enter()
         {
             base.Enter();
             Debug.Log("Entered");
             rend = GetComponent<Renderer>(); //getting the renderer of the tile
-            
-
+            //tileStateManagerRef = GetComponent<TileStateManager>();
         }
 
         public override void Execute()
         {
             base.Execute();
-
             rend.material.SetColor("Color", Color.gray);
-            
-            if (GetComponent<StateCounter>().counter >= 0.7f)
+            /*if (tileStateManagerRef.counter >= 0.7f)
             {
-                GetComponent<TileStateManager>().ChangeState(fireState);
+                tileStateManagerRef.ChangeState(fireState);
             }
-           
-            if ( GetComponent<StateCounter>().counter <= -0.7f)
+            if (tileStateManagerRef.counter <= -0.7f)
             {
-               GetComponent<TileStateManager>().ChangeState(waterState);
-            }
-            
-
+                tileStateManagerRef.ChangeState(waterState);
+            }*/
         }
 
         public override void Exit()
