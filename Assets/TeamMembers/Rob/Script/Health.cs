@@ -20,21 +20,21 @@ public class Health : MonoBehaviour
     }
 
 
-    public void OnEnable()
-    {
-        FindObjectOfType<EventManager>().DeathEvent += DeathEvent;
-        FindObjectOfType<EventManager>().OnDamageEvent += DamageEventTaken;
+     public void OnEnable()
+     {
+         FindObjectOfType<EventManager>().DeathEvent += DeathEvent;
+         FindObjectOfType<EventManager>().OnDamageEvent += DamageEventTaken;
 
-    }
+     }
 
-    public void OnDisable()
-    {
-        FindObjectOfType<EventManager>().DeathEvent -= DeathEvent;
-        FindObjectOfType<EventManager>().OnDamageEvent -= DamageEventTaken;
-    }
+     public void OnDisable()
+     {
+         FindObjectOfType<EventManager>().DeathEvent -= DeathEvent;
+         FindObjectOfType<EventManager>().OnDamageEvent -= DamageEventTaken;
+     }
 
 
-    public void DamageEventTaken(float damageAmount)
+     public void DamageEventTaken(float damageAmount)
     {
         currentHealth -= damageAmount;
         healthBar.SetHealth(currentHealth);
