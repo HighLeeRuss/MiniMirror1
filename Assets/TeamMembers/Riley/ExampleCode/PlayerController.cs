@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 
 namespace RileyMcGowan
 {
-    public class PlayerController : NetworkBehaviour
+    public class PlayerController : PlayerBase
     {
         private PlayerInputBasic playerControlls; //Make a player controller for this player
         private Rigidbody rb;

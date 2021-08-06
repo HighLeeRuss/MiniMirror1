@@ -23,17 +23,17 @@ namespace Luke
 
             if (GUILayout.Button("Load Level"))
             {
-                gameManager.CmdRequestLoadLevel();
+                gameManager.LoadLevel();
             }
 
             if (GUILayout.Button("Start Level"))
             {
-                gameManager.CmdRequestStartLevel();
+                gameManager.StartLevel();
             }
 
             if (GUILayout.Button("Lose Level"))
             {
-                gameManager.CmdRequestGameLoss();
+                gameManager.RequestGameLoss();
             }
 
             if (GUILayout.Button("Win Level"))

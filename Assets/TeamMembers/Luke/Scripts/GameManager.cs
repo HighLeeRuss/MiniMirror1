@@ -29,13 +29,13 @@ namespace Luke
 
         private void OnEnable()
         {
-            timer.TimerEndEvent += CmdRequestGameLoss;
+            timer.TimerEndEvent += RequestGameLoss;
             gameStateManager = GetComponent<GameStateManager>();
         }
 
         private void OnDisable()
         {
-            timer.TimerEndEvent -= CmdRequestGameLoss;
+            timer.TimerEndEvent -= RequestGameLoss;
         }
 
         /// <summary>
@@ -57,14 +57,7 @@ namespace Luke
         /// <summary>
         /// Send event to setup of level before we start the game. Set up tiles, spawning positions and any PowerUps???
         /// </summary>
-        [Command(requiresAuthority = false)]
-        public void CmdRequestLoadLevel()
-        {
-            RpcLoadLevel();
-        }
-
-        [ClientRpc]
-        public void RpcLoadLevel()
+        public void LoadLevel()
         {
             LoadLevelEvent?.Invoke();
             spawner.SpawnScene();
@@ -73,26 +66,17 @@ namespace Luke
         /// <summary>
         /// Send event to spawn Players and ProtectionPoints + start timer???
         /// </summary>
-        [Command(requiresAuthority = false)]
-        public void CmdRequestStartLevel()
-        {
-            RpcStartLevel();
-        }
-        
-        [ClientRpc]
-        public void RpcStartLevel()
+        public void StartLevel()
         {
             StartLevelEvent?.Invoke();
             gameStateManager.stateManager.ChangeState(gameStateManager.startOfGame);
-            //Spawning player + protection points
-            
         }
 
         /// <summary>
         /// Send event to bring up end game screen and show finish time??? receive events from Protection Points and player HP
         /// </summary>
         [Command(requiresAuthority = false)]
-        public void CmdRequestGameLoss()
+        public void RequestGameLoss()
         {
             RpcGameLoss();
         }
