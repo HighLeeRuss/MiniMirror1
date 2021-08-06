@@ -26,17 +26,15 @@ namespace Luke
         //Variables
         public List<GameObject> players;
 
-        public override void OnStartServer()
+
+        private void OnEnable()
         {
-            base.OnStartServer();
-            gameStateManager = GetComponent<GameStateManager>();
             timer.TimerEndEvent += CmdRequestGameLoss;
+            gameStateManager = GetComponent<GameStateManager>();
         }
 
-        public override void OnStopServer()
+        private void OnDisable()
         {
-            base.OnStopServer();
-
             timer.TimerEndEvent -= CmdRequestGameLoss;
         }
 
