@@ -25,6 +25,14 @@ public class @PlayerInputBasic : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""MouseClick"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4aee7bb-7e6c-441a-ae49-ef8c4eeb42fc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -82,6 +90,17 @@ public class @PlayerInputBasic : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fdfe4253-aded-441e-a74b-7f757871168e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MouseClick"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -91,6 +110,7 @@ public class @PlayerInputBasic : IInputActionCollection, IDisposable
         // InGame
         m_InGame = asset.FindActionMap("InGame", throwIfNotFound: true);
         m_InGame_Move = m_InGame.FindAction("Move", throwIfNotFound: true);
+        m_InGame_MouseClick = m_InGame.FindAction("MouseClick", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,11 +161,13 @@ public class @PlayerInputBasic : IInputActionCollection, IDisposable
     private readonly InputActionMap m_InGame;
     private IInGameActions m_InGameActionsCallbackInterface;
     private readonly InputAction m_InGame_Move;
+    private readonly InputAction m_InGame_MouseClick;
     public struct InGameActions
     {
         private @PlayerInputBasic m_Wrapper;
         public InGameActions(@PlayerInputBasic wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_InGame_Move;
+        public InputAction @MouseClick => m_Wrapper.m_InGame_MouseClick;
         public InputActionMap Get() { return m_Wrapper.m_InGame; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -158,6 +180,9 @@ public class @PlayerInputBasic : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnMove;
+                @MouseClick.started -= m_Wrapper.m_InGameActionsCallbackInterface.OnMouseClick;
+                @MouseClick.performed -= m_Wrapper.m_InGameActionsCallbackInterface.OnMouseClick;
+                @MouseClick.canceled -= m_Wrapper.m_InGameActionsCallbackInterface.OnMouseClick;
             }
             m_Wrapper.m_InGameActionsCallbackInterface = instance;
             if (instance != null)
@@ -165,6 +190,9 @@ public class @PlayerInputBasic : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @MouseClick.started += instance.OnMouseClick;
+                @MouseClick.performed += instance.OnMouseClick;
+                @MouseClick.canceled += instance.OnMouseClick;
             }
         }
     }
@@ -172,5 +200,6 @@ public class @PlayerInputBasic : IInputActionCollection, IDisposable
     public interface IInGameActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnMouseClick(InputAction.CallbackContext context);
     }
 }
