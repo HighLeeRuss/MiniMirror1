@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rob;
 
-namespace Luke
+namespace LukeBaker
 {
     public class ProtectionPoint : MonoBehaviour
     {

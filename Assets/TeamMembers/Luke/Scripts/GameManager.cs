@@ -5,7 +5,7 @@ using Mirror;
 using UnityEngine;
 using RileyMcGowan;
 
-namespace Luke
+namespace LukeBaker
 {
     public class GameManager : NetworkBehaviour
     {
@@ -24,7 +24,6 @@ namespace Luke
         public event Action GameWonEvent;
 
         //Variables
-        public List<GameObject> players;
 
 
         private void OnEnable()
