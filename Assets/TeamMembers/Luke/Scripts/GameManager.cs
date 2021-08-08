@@ -31,6 +31,7 @@ namespace Luke
         {
             timer.TimerEndEvent += RequestGameLoss;
             gameStateManager = GetComponent<GameStateManager>();
+            networkMan = GetComponent<CustomNetworkManager>();
         }
 
         private void OnDisable()
@@ -102,6 +103,11 @@ namespace Luke
         {
             GameWonEvent?.Invoke();
             gameStateManager.stateManager.ChangeState(gameStateManager.endOfGame);
+        }
+
+        public void PlayerReady()
+        {
+            
         }
         
         public void SpawnHealthBars()

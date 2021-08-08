@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Luke;
 using Mirror;
 using UnityEngine;
@@ -13,55 +14,55 @@ public class CustomNetworkManager : NetworkManager
     //variables
     private List<NetworkConnection> connections;
     private List<GameObject> playerGOs;
-
-    private Transform startPos;
-    private GameObject player;
     
-    public List<Transform> startPositions;
+    private GameObject player = null;
+    
+    public List<Transform> spawnPoints;
+    private int nextIndex = 0;
+
+    [SerializeField] private GameObject playerSpawnSystem = null;
+
+    //events
+    public static event Action<NetworkConnection> OnServerReadied;
 
 
     private void OnEnable()
     {
         gameManager = FindObjectOfType<GameManager>();
-        
     }
 
     private void OnDisable()
     {
-        gameManager.StartLevelEvent -= OnPlayerInstantiate;
+        gameManager.StartLevelEvent -= SceneReadyForPlayer;
     }
 
     public override void OnStartServer()
     {
         base.OnStartServer();
-        gameManager.StartLevelEvent += OnPlayerInstantiate;
+        gameManager.StartLevelEvent += SceneReadyForPlayer;
     }
 
-    public override void OnStartClient()
+    //TODO: probably belongs to spawner script  (player spawn function)
+    public void SpawnPlayer(NetworkConnection conn)
     {
-        base.OnStartClient();
-    }
+        Transform spawnPoint = spawnPoints.ElementAtOrDefault(nextIndex);
 
-    public override void OnServerAddPlayer(NetworkConnection conn)
-    {
-        //adding new players into a small lobby
-        connections.Add(conn);
-        playerGOs.Add(player);
-    }
-    public void OnPlayerInstantiate()
-    {
-        for (int i = 0; i < connections.Count; i++) 
+        if (spawnPoint == null)
         {
-            startPos = GetStartPosition();
-            
-            playerGOs[i] = startPos != null
-                ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-                : Instantiate(playerPrefab);
-                
-            // instantiating a "Player" prefab gives it the name "Player(clone)"
-            // => appending the connectionId is WAY more useful for debugging!
-            playerGOs[i].name = $"{playerPrefab.name} [connId={connections[i] .connectionId}]";
-            NetworkServer.AddPlayerForConnection(connections[i], playerGOs[i]);
+            Debug.LogError($"Missing spawnPoint for player {nextIndex}");
+            return;
         }
+
+        GameObject playerInstance =
+            Instantiate(playerPrefab, spawnPoints[nextIndex].position, spawnPoints[nextIndex].rotation);
+        NetworkServer.Spawn(playerInstance, conn);
+
+        nextIndex++;
+    }
+
+    public void SceneReadyForPlayer()
+    {
+        GameObject playerSpawnSystemInstance = Instantiate(playerSpawnSystem);
+        NetworkServer.Spawn(playerSpawnSystemInstance);
     }
 }
