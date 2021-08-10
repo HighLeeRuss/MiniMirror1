@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Luke;
+using LukeBaker;
 using Mirror;
 using UnityEngine;
 
-namespace Luke
+namespace LukeBaker
 {
     public class SoundManager : NetworkBehaviour
     {

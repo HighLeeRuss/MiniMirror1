@@ -1,31 +1,51 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Luke;
+using System.Linq;
+using LukeBaker;
 using Mirror;
 using UnityEngine;
 
 public class CustomNetworkManager : NetworkManager
 {
+    //references
+    public GameManager gameManager;
+    
+    //variables
+    private List<NetworkConnection> connections;
+    private List<GameObject> playerGOs;
+    
+    [SerializeField] private GameObject playerSpawnSystem = null;
+
+    //events
+    public static event Action<NetworkConnection> OnServerReadiedEvent;
+
+    private void OnEnable()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
+
+    private void OnDisable()
+    {
+        gameManager.StartLevelEvent -= SceneReadyForPlayer;
+    }
+
     public override void OnStartServer()
     {
         base.OnStartServer();
+        gameManager.StartLevelEvent += SceneReadyForPlayer;
     }
 
-    public override void OnStartClient()
+    public void SceneReadyForPlayer()
     {
-        base.OnStartClient();
+        GameObject playerSpawnSystemInstance = Instantiate(playerSpawnSystem);
+        NetworkServer.Spawn(playerSpawnSystemInstance);
     }
-    public virtual void OnServerAddPlayer(NetworkConnection conn)
-    {
-        Transform startPos = GetStartPosition();
-        GameObject player = startPos != null
-            ? Instantiate(playerPrefab, startPos.position, startPos.rotation)
-            : Instantiate(playerPrefab);
 
-        // instantiating a "Player" prefab gives it the name "Player(clone)"
-        // => appending the connectionId is WAY more useful for debugging!
-        player.name = $"{playerPrefab.name} [connId={conn.connectionId}]";
-        NetworkServer.AddPlayerForConnection(conn, player);
+    public override void OnServerReady(NetworkConnection conn)
+    {
+        base.OnServerReady(conn);
+        
+        OnServerReadiedEvent?.Invoke(conn);
     }
 }

@@ -1,20 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
-using Luke;
+using LukeBaker;
+using Mirror;
 using UnityEditor;
 using UnityEditor.Experimental.TerrainAPI;
 using UnityEngine;
 
-namespace Luke
+namespace LukeBaker
 {
     [CustomEditor(typeof(GameManager))]
-    public class Editor : UnityEditor.Editor
+    public class GameManEditor : Editor
     {
-
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
             GameManager gameManager = (GameManager) target;
+            CustomNetworkManager customNetworkManager = gameManager.networkMan;
+            
+            if (GUILayout.Button("READY"))
+            {
+                customNetworkManager.OnServerReady(new NetworkConnectionToServer());
+            }
 
             if (GUILayout.Button("Level Reset"))
             {
@@ -23,17 +29,17 @@ namespace Luke
 
             if (GUILayout.Button("Load Level"))
             {
-                gameManager.CmdRequestLoadLevel();
+                gameManager.LoadLevel();
             }
 
             if (GUILayout.Button("Start Level"))
             {
-                gameManager.CmdRequestStartLevel();
+                gameManager.StartLevel();
             }
 
             if (GUILayout.Button("Lose Level"))
             {
-                gameManager.CmdRequestGameLoss();
+                gameManager.RequestGameLoss();
             }
 
             if (GUILayout.Button("Win Level"))

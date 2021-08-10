@@ -14,7 +14,7 @@ namespace RileyMcGowan
         private void Awake()
         {
             thisRigidbody = GetComponent<Rigidbody>();
-            thisRigidbody.AddRelativeForce(100,0,0);
+            thisRigidbody.AddRelativeForce(0,0,80);
         }
         
         private void OnCollisionEnter(Collision other)
@@ -26,7 +26,7 @@ namespace RileyMcGowan
             }
             else
             {
-                Destroy(gameObject);
+                StartCoroutine(OldObject());
             }
         }
         
@@ -36,6 +36,12 @@ namespace RileyMcGowan
             tileStateManager.beingWet = true;
             yield return new WaitForSeconds(3);
             tileStateManager.beingWet = false;
+            Destroy(gameObject);
+        }
+        IEnumerator OldObject()
+        {
+            thisRigidbody.isKinematic = true;
+            yield return new WaitForSeconds(3);
             Destroy(gameObject);
         }
     }
