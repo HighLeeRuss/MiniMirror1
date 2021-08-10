@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using RileyMcGowan;
 using Rob;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class TriggerScript : MonoBehaviour
 {
@@ -35,5 +37,4 @@ public class TriggerScript : MonoBehaviour
         yield return new WaitForSeconds(2);
         isFireDamaging = false;
     }
-    
 }
