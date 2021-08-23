@@ -104,11 +104,6 @@ namespace LukeBaker
             gameStateManager.stateManager.ChangeState(gameStateManager.endOfGame);
         }
 
-        public void PlayerReady()
-        {
-            
-        }
-        
         public void SpawnHealthBars()
         {
             
