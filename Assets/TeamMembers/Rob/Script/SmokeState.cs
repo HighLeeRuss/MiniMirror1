@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 using Rob;
 using UnityEngine.InputSystem;
@@ -18,11 +19,10 @@ namespace Rob
         public override void Enter()
         {
             base.Enter();
-            if (rend == null)
+            Debug.Log("Entered");
+            if (isClient)
             {
-                Debug.Log("Entered");
-                rend = GetComponent<Renderer>(); //getting the renderer of the tile
-                rend.material.SetColor("_Color", Color.gray);
+                RpcChangeColour();
             }
         }
 
@@ -35,6 +35,13 @@ namespace Rob
         {
             base.Exit();
         }
-        
+
+        [ClientRpc]
+        public override void RpcChangeColour()
+        {
+            base.RpcChangeColour();
+            rend = GetComponent<Renderer>(); //getting the renderer of the tile
+            rend.material.SetColor("_Color", Color.gray);
+        }
     }
 }

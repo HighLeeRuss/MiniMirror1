@@ -2,31 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Mirror;
 
 namespace Rob
 { 
-    public class TileStateManager : MonoBehaviour
+    public class TileStateManager : NetworkBehaviour
     {
         public StateBase currentState;
         public bool onFire;
         public bool beingWet;
         public float counterTime;
         public float delay;
+        [SyncVar]
         public float counter;
         
-
         private FireState fireState;
         private WaterState waterState;
         private SmokeState smokeState;
 
-
-        private void Start()
+        public override void OnStartServer()
         {
-            fireState = FindObjectOfType<FireState>();
-            waterState = FindObjectOfType<WaterState>();
-            smokeState = FindObjectOfType<SmokeState>();
-
-            currentState = smokeState;
+            base.OnStartServer();
+            fireState = GetComponent<FireState>();
+            waterState = GetComponent<WaterState>();
+            smokeState = GetComponent<SmokeState>();
+            if (isServer)
+            {
+                CmdChangeState(smokeState);
+            }
         }
 
         /// <summary>
@@ -34,72 +37,58 @@ namespace Rob
         /// </summary>
         private void FixedUpdate()
         {
-            if (onFire)
+            if (fireState == null || waterState == null || smokeState == null)
             {
-                FireCounter();
+                fireState = GetComponent<FireState>();
+                waterState = GetComponent<WaterState>();
+                smokeState = GetComponent<SmokeState>();
             }
-
-            if (beingWet)
+            if (isClient)
             {
-                WaterCounter();
-            }
-
-            if (fireState.spreadFireTo.Count > 0)
-            {
-                foreach (GameObject tile in fireState.spreadFireTo)
+                if (onFire)
                 {
-                    Debug.Log(tile);
-                    tile.GetComponent<TileStateManager>().onFire = true;
+                    FireCounter();
                 }
-            }
-
-
-
-            if (Counter > 0.75f && currentState != fireState)
-            {
-                ChangeState(fireState);
-            }
             
-            else if (Counter < -0.75f && currentState != waterState)
-            {
-                ChangeState(waterState);
-            }
-
-            if (Counter < 0.7f && Counter > -0.7f)
-            {
-                ChangeState(smokeState);
-            }
+                if (beingWet)
+                {
+                    WaterCounter();
+                }
             
+                if (fireState.spreadFireTo.Count > 0)
+                {
+                    foreach (GameObject tile in fireState.spreadFireTo)
+                    {
+                        Debug.Log(tile);
+                        tile.GetComponent<TileStateManager>().onFire = true;
+                    }
+                }
             
-
-
-
-
-
-
-            //Remind what the current state is
-            currentState?.Execute();
+                if (Counter > 0.75f && currentState != fireState)
+                {
+                    CmdChangeState(fireState);
+                }
+            
+                else if (Counter < -0.75f && currentState != waterState)
+                {
+                    CmdChangeState(waterState);
+                }
+            
+                if (Counter < 0.7f && Counter > -0.7f && currentState != smokeState)
+                {
+                    CmdChangeState(smokeState);
+                }
+            
+                //Remind what the current state is
+                currentState?.Execute();
+            }
         }
         
         /// <summary>
         /// Functions
         /// </summary>
         /// <param name="newState"></param>
-        public void ChangeState(StateBase newState)
-        {
-            if (currentState != null)
-            {
-                currentState.active = false;
-                currentState.Exit();
-            }
-
-            if (newState != null)
-            {
-                newState.active = true;
-                newState.Enter();
-                currentState = newState;
-            }
-        }
+        
         
         void FireCounter()
         {
@@ -142,6 +131,29 @@ namespace Rob
                 {
                     counter = -1f;
                 }
+            }
+        }
+        
+        [Command(requiresAuthority = false)]
+        public void CmdChangeState(StateBase newState)
+        {
+            RpcChangeState(newState);
+        }
+        
+        [ClientRpc]
+        private void RpcChangeState(StateBase newState)
+        {
+            if (currentState != null)
+            {
+                currentState.active = false;
+                currentState.Exit();
+            }
+
+            if (newState != null)
+            {
+                newState.active = true;
+                newState.Enter();
+                currentState = newState;
             }
         }
     }

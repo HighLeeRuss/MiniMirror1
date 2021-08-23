@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Mirror;
 
 namespace Rob
 {
@@ -9,7 +10,7 @@ namespace Rob
     
 
         //[Serializable]
-    public class StateBase : MonoBehaviour
+    public class StateBase : NetworkBehaviour
     {
         public bool active;
 
@@ -24,6 +25,12 @@ namespace Rob
         }    
 
         public virtual void Exit()
+        {
+            
+        }
+
+        [ClientRpc]
+        public virtual void RpcChangeColour()
         {
             
         }

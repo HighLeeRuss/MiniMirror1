@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 
 using Rob;
 
 namespace Rob
 {
-
-
-
     public class WaterState : StateBase
     {
         private Renderer rend;
@@ -19,13 +17,15 @@ namespace Rob
         {
             base.Enter();
             Debug.Log("Entered");
-            rend = GetComponent<Renderer>(); //getting the renderer of the tile
+            if (isClient)
+            {
+                RpcChangeColour();
+            }
         }
 
         public override void Execute()
         {
             base.Execute();
-            rend.material.SetColor("_Color", Color.blue);
            
         }
 
@@ -34,7 +34,13 @@ namespace Rob
             base.Exit();
             Debug.Log("we left");
         }
-        
-        
+
+        [ClientRpc]
+        public override void RpcChangeColour()
+        {
+            base.RpcChangeColour();
+            rend = GetComponent<Renderer>(); //getting the renderer of the tile
+            rend.material.SetColor("_Color", Color.blue);
+        }
     }
 }

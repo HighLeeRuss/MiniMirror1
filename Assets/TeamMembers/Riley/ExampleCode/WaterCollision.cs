@@ -10,6 +10,7 @@ namespace RileyMcGowan
     {
         private TileStateManager tileStateManager;
         private Rigidbody thisRigidbody;
+        private Vector3 resetVelocity = new Vector3(0, 0, 0);
         
         private void Awake()
         {
@@ -32,7 +33,7 @@ namespace RileyMcGowan
         
         IEnumerator WetObject()
         {
-            thisRigidbody.isKinematic = true;
+            thisRigidbody.velocity = resetVelocity;
             tileStateManager.beingWet = true;
             yield return new WaitForSeconds(3);
             tileStateManager.beingWet = false;
@@ -40,7 +41,6 @@ namespace RileyMcGowan
         }
         IEnumerator OldObject()
         {
-            thisRigidbody.isKinematic = true;
             yield return new WaitForSeconds(3);
             Destroy(gameObject);
         }
