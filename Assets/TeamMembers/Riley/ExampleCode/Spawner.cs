@@ -10,14 +10,14 @@ namespace RileyMcGowan
     public class Spawner : NetworkBehaviour
     {
         //Private Vars
-        private List<GameObject> usedSpawnLocations;
-        private List<GameObject> specialObjectsSpawned;
         private int tilesCounter;
         private NetworkManager networkManager;
         private Vector2 compairSpecialSpawn;
         
         //Public Vars
         public List<GameObject> specialObjectsToSpawn;
+        public List<GameObject> specialObjectsSpawned;
+        public List<GameObject> usedSpawnLocations;
         public GameObject playerPrefab;
         public List<GameObject> spawnedTiles;
         public GameObject fireTile;
