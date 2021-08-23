@@ -25,7 +25,8 @@ namespace RileyMcGowan
             playerControls.Enable(); //Turn on action map
             if (isLocalPlayer)
             {
-                playerControls.InGame.MouseClick.performed += ShootWater;
+                //Grab a control performed > Ignore the provided context > Input the client position and rotation
+                playerControls.InGame.MouseClick.performed += context => CmdShootWater(waterGun.transform.position, waterGun.transform.rotation);
             }
         }
 
@@ -58,10 +59,17 @@ namespace RileyMcGowan
             direction *= speed;
             characterController.SimpleMove(direction);
         }
-        
-        private void ShootWater(InputAction.CallbackContext obj)
+
+        [Command()] //Register Command
+        private void CmdShootWater(Vector3 waterGun, Quaternion gunRotation)
         {
-            GameObject spawnedWater = Instantiate(waterSpawnable, waterGun.transform.position, waterGun.transform.rotation);
+            //Pass the client info through as a command
+            ShootWater(waterGun, gunRotation);
+        }
+
+        private void ShootWater(Vector3 waterGun, Quaternion gunRotation)
+        {
+            GameObject spawnedWater = Instantiate(waterSpawnable, waterGun, gunRotation);
             NetworkServer.Spawn(spawnedWater);
         }
     }

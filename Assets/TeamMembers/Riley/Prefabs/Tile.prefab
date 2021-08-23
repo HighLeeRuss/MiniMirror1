@@ -14,6 +14,9 @@ GameObject:
   - component: {fileID: 8013138779869107916}
   - component: {fileID: 5131026228993051405}
   - component: {fileID: -3449519876200601444}
+  - component: {fileID: 7541658261014200601}
+  - component: {fileID: -3329335890640872336}
+  - component: {fileID: -718354378284470586}
   m_Layer: 0
   m_Name: Tile
   m_TagString: Untagged
@@ -134,3 +137,47 @@ MonoBehaviour:
   counterTime: 0
   delay: 1
   counter: 0
+--- !u!114 &7541658261014200601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059911068315229969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f37ddb0d439a2664c8d5141ad46d40d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 0
+  smokeState: {fileID: -3329335890640872336}
+  spreadFireTo: []
+--- !u!114 &-3329335890640872336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059911068315229969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6866bc60b444f4ea94abe4014f5f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 0
+  fireState: {fileID: 7541658261014200601}
+  waterState: {fileID: -718354378284470586}
+--- !u!114 &-718354378284470586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8059911068315229969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b1d6f66af813634c8d7c3eebaeff87a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 0
+  smokeState: {fileID: -3329335890640872336}

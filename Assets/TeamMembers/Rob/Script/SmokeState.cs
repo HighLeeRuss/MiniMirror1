@@ -18,14 +18,17 @@ namespace Rob
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("Entered");
-            rend = GetComponent<Renderer>(); //getting the renderer of the tile
+            if (rend == null)
+            {
+                Debug.Log("Entered");
+                rend = GetComponent<Renderer>(); //getting the renderer of the tile
+                rend.material.SetColor("_Color", Color.gray);
+            }
         }
 
         public override void Execute()
         {
             base.Execute();
-            rend.material.SetColor("_Color", Color.gray);
         }
 
         public override void Exit()
