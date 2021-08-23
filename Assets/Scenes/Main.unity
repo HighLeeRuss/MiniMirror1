@@ -749,8 +749,14 @@ PrefabInstance:
     - target: {fileID: 7490570148553362779, guid: ececc36bb21b0854daf6a69588c1f94a,
         type: 3}
       propertyPath: autoCreatePlayer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7490570148553362779, guid: ececc36bb21b0854daf6a69588c1f94a,
+        type: 3}
+      propertyPath: playerSpawnObject
+      value: 
+      objectReference: {fileID: 5533287416104188762, guid: 13ca16872415cff47933bcaffd8ea747,
+        type: 3}
     - target: {fileID: 7490570148553362779, guid: ececc36bb21b0854daf6a69588c1f94a,
         type: 3}
       propertyPath: playerSpawnSystem
