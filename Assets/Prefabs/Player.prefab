@@ -44,9 +44,8 @@ GameObject:
   - component: {fileID: 5533287416104188756}
   - component: {fileID: 5533287416104188752}
   - component: {fileID: 5533287416104188753}
-  - component: {fileID: 5533287416104188763}
-  - component: {fileID: 2975848991768736548}
   - component: {fileID: -5054870774374785260}
+  - component: {fileID: -3612320687379509988}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -149,10 +148,12 @@ MonoBehaviour:
   syncInterval: 0.1
   playerName: 
   gameO: {fileID: 0}
+  speed: 5
   waterGun: {fileID: 2103621290076328811}
   pivotPoint: {fileID: 8247053230389613137}
   waterSpawnable: {fileID: 1413898932851378014, guid: f9d47e8e1a060a14bba082fc82694749,
     type: 3}
+  characterController: {fileID: -3612320687379509988}
 --- !u!114 &5533287416104188753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,44 +171,6 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
---- !u!54 &5533287416104188763
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5533287416104188762}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!114 &2975848991768736548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5533287416104188762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83392ae5c1b731446909f252fd494ae4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  target: {fileID: 5533287416104188763}
-  clientAuthority: 1
-  syncVelocity: 1
-  clearVelocity: 0
-  velocitySensitivity: 0.1
-  syncAngularVelocity: 1
-  clearAngularVelocity: 0
-  angularVelocitySensitivity: 0.1
 --- !u!114 &-5054870774374785260
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -231,6 +194,24 @@ MonoBehaviour:
   interpolateRotation: 1
   interpolatePosition: 1
   syncScale: 1
+--- !u!143 &-3612320687379509988
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5533287416104188762}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8247053230389613137
 GameObject:
   m_ObjectHideFlags: 0

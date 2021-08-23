@@ -9,13 +9,14 @@ namespace RileyMcGowan
     public class PlayerController : PlayerBase
     {
         private PlayerInputBasic playerControlls; //Make a player controller for this player
-        private Rigidbody rb;
         private Vector2 playerMoveVector;
-        private float speed = 10;
-        private float maxSpeed = 15;
+        public float speed = 2;
         public GameObject waterGun;
         public GameObject pivotPoint;
         public GameObject waterSpawnable;
+        private float horizontal;
+        private float vertical;
+        public CharacterController characterController;
 
         public override void OnStartServer()
         {
@@ -25,7 +26,6 @@ namespace RileyMcGowan
             playerControlls.InGame.Move.performed += MoveOnperformed;
             playerControlls.InGame.Move.canceled += MoveOnperformed;
             playerControlls.InGame.MouseClick.performed += ShootWater;
-            rb = GetComponent<Rigidbody>();
         }
 
         private void MoveOnperformed(InputAction.CallbackContext obj)
@@ -43,19 +43,7 @@ namespace RileyMcGowan
         {
             if (isLocalPlayer)
             {
-                if (rb == null && GetComponent<Rigidbody>() != null)
-                {
-                    rb = GetComponent<Rigidbody>();
-                }
-                if (rb.velocity.x < maxSpeed)
-                {
-                    rb.AddRelativeForce(playerMoveVector.x * speed, 0, 0);
-                    //SendVelocity();
-                }
-                if (rb.velocity.z < maxSpeed)
-                {
-                    rb.AddRelativeForce(0, 0, playerMoveVector.y * speed);
-                }
+                SendVelocity();
                 Plane plane = new Plane(Vector3.up, 0);
 
                 float distance;
@@ -71,6 +59,13 @@ namespace RileyMcGowan
         void SendVelocity()
         {
             //cmdSendVelocity;
+            horizontal = Input.GetAxis("Horizontal");
+            vertical = Input.GetAxis("Vertical");
+            Vector3 direction = new Vector3(horizontal, transform.position.y, vertical);
+            direction = Vector3.ClampMagnitude(direction, 1f);
+            direction = transform.TransformDirection(direction);
+            direction *= speed;
+            characterController.SimpleMove(direction);
         }
     }
 }
