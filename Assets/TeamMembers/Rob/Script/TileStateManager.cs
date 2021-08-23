@@ -14,6 +14,19 @@ namespace Rob
         public float delay;
         public float counter;
         
+
+        private FireState fireState;
+        private WaterState waterState;
+        private SmokeState smokeState;
+
+
+        private void Start()
+        {
+            fireState = GetComponent<FireState>();
+            waterState = GetComponent<WaterState>();
+            smokeState = GetComponent<SmokeState>();
+        }
+
         /// <summary>
         /// Core
         /// </summary>
@@ -29,18 +42,52 @@ namespace Rob
                 WaterCounter();
             }
 
+            if (fireState.spreadFireTo.Count > 0)
+            {
+                foreach (GameObject tile in fireState.spreadFireTo)
+                {
+                    Debug.Log(tile);
+                    onFire = true;
+                }
+            }
+
             /*if (Counter > 0.75f && currentState != fireState)
             {
                 ChangeState(fireState);
             }
+            if (Counter < -0.75f && currentState != waterState)
+            {
+                ChangeState(waterState);
+            }
+            else
+            {
+                
+            }*/
+            
+
+
+            if (Counter > 0.75f && currentState != fireState)
+            {
+                ChangeState(fireState);
+            }
+            
             else if (Counter < -0.75f && currentState != waterState)
             {
                 ChangeState(waterState);
             }
-            else if (currentState != smokeState)
+
+            if (Counter < 0.7f && Counter > -0.7f)
             {
                 ChangeState(smokeState);
-            }*/
+            }
+            
+            
+
+
+
+
+
+
             //Remind what the current state is
             currentState?.Execute();
         }

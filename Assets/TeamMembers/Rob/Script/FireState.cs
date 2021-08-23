@@ -16,40 +16,46 @@ namespace Rob
         private Renderer rend;
         public StateBase smokeState;
         private int moistness;
-        //private TileStateManager tileStateManagerRef;
+        public List<GameObject> spreadFireTo;
+        private bool onFire = false;
+        private TileStateManager tsm;
 
-        /*public void OnEnable()
-        {
-            FindObjectOfType<EventManager>().OnDamageEvent += DealDamage;
-        }
-
-        public void OnDisable()
-        {
-            FindObjectOfType<EventManager>().OnDamageEvent -= DealDamage;
-        }*/
 
         public override void Enter()
         {
             base.Enter();
             Debug.Log("Entered");
             rend = GetComponent<Renderer>(); //getting the renderer of the tile
-            //tileStateManagerRef = GetComponent<TileStateManager>();
+            onFire = true;
+            tsm = GetComponent<TileStateManager>();
         }
 
         public override void Execute()
         {
             base.Execute();
             Debug.Log("executing");
-            rend.material.SetColor("Color", Color.red);
-            /*if (tileStateManagerRef.counter <= 0.5f)
+            rend.material.SetColor("_Color", Color.red);
+
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
+            foreach (var hitCollider in hitColliders)
             {
-                tileStateManagerRef.ChangeState(smokeState);
-            }*/
+                Debug.Log(hitCollider);
+                if (hitCollider.gameObject.GetComponent<TileStateManager>() != null && hitCollider.gameObject.GetComponent<TileStateManager>() != tsm)
+                {
+                    GameObject tiles = hitCollider.gameObject;
+                    spreadFireTo.Add(tiles);
+                }
+                
+                
+            }
+
         }
 
         public override void Exit()
         {
             base.Exit();
+            //tsm.ChangeState(smokeState);
+            Debug.Log(tsm.currentState);
         }
 
         private void OnTriggerStay(Collider other)
