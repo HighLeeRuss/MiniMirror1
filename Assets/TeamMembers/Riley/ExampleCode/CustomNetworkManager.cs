@@ -33,6 +33,12 @@ public class CustomNetworkManager : NetworkManager
     public override void OnStartServer()
     {
         base.OnStartServer();
+    }
+
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+        
         gameManager.StartLevelEvent += SceneReadyForPlayer;
     }
 
