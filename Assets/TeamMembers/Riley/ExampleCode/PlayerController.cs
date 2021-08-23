@@ -8,7 +8,7 @@ namespace RileyMcGowan
 {
     public class PlayerController : PlayerBase
     {
-        private PlayerInputBasic playerControlls; //Make a player controller for this player
+        private PlayerInputBasic playerControls; //Make a player controller for this player
         private Vector2 playerMoveVector;
         public float speed = 2;
         public GameObject waterGun;
@@ -18,24 +18,15 @@ namespace RileyMcGowan
         private float vertical;
         public CharacterController characterController;
 
-        public override void OnStartServer()
+        public override void OnStartClient()
         {
-            base.OnStartServer();
-            playerControlls = new PlayerInputBasic();
-            playerControlls.Enable(); //Turn on action map
-            playerControlls.InGame.Move.performed += MoveOnperformed;
-            playerControlls.InGame.Move.canceled += MoveOnperformed;
-            playerControlls.InGame.MouseClick.performed += ShootWater;
-        }
-
-        private void MoveOnperformed(InputAction.CallbackContext obj)
-        {
-            playerMoveVector = obj.ReadValue<Vector2>();
-        }
-        
-        private void ShootWater(InputAction.CallbackContext obj)
-        {
-            Instantiate(waterSpawnable, waterGun.transform.position, waterGun.transform.rotation);
+            base.OnStartClient();
+            playerControls = new PlayerInputBasic();
+            playerControls.Enable(); //Turn on action map
+            if (isLocalPlayer)
+            {
+                playerControls.InGame.MouseClick.performed += ShootWater;
+            }
         }
 
         // Update is called once per frame
@@ -43,9 +34,9 @@ namespace RileyMcGowan
         {
             if (isLocalPlayer)
             {
-                SendVelocity();
+                MovePlayer();
+                //Detect Player Mouse Pos
                 Plane plane = new Plane(Vector3.up, 0);
-
                 float distance;
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (plane.Raycast(ray, out distance))
@@ -56,7 +47,7 @@ namespace RileyMcGowan
             }
         }
 
-        void SendVelocity()
+        void MovePlayer()
         {
             //cmdSendVelocity;
             horizontal = Input.GetAxis("Horizontal");
@@ -66,6 +57,12 @@ namespace RileyMcGowan
             direction = transform.TransformDirection(direction);
             direction *= speed;
             characterController.SimpleMove(direction);
+        }
+        
+        private void ShootWater(InputAction.CallbackContext obj)
+        {
+            GameObject spawnedWater = Instantiate(waterSpawnable, waterGun.transform.position, waterGun.transform.rotation);
+            NetworkServer.Spawn(spawnedWater);
         }
     }
 }
