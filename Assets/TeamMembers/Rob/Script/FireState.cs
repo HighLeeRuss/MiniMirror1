@@ -28,14 +28,8 @@ namespace Rob
             rend = GetComponent<Renderer>(); //getting the renderer of the tile
             onFire = true;
             tsm = GetComponent<TileStateManager>();
-        }
-
-        public override void Execute()
-        {
-            base.Execute();
-            Debug.Log("executing");
-            rend.material.SetColor("_Color", Color.red);
-
+            
+            
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
             foreach (var hitCollider in hitColliders)
             {
@@ -48,6 +42,16 @@ namespace Rob
                 
                 
             }
+            
+        }
+
+        public override void Execute()
+        {
+            base.Execute();
+            Debug.Log("executing");
+            rend.material.SetColor("_Color", Color.red);
+
+            
 
         }
 

@@ -47,23 +47,10 @@ namespace Rob
                 foreach (GameObject tile in fireState.spreadFireTo)
                 {
                     Debug.Log(tile);
-                    onFire = true;
+                    tile.GetComponent<TileStateManager>().onFire = true;
                 }
             }
 
-            /*if (Counter > 0.75f && currentState != fireState)
-            {
-                ChangeState(fireState);
-            }
-            if (Counter < -0.75f && currentState != waterState)
-            {
-                ChangeState(waterState);
-            }
-            else
-            {
-                
-            }*/
-            
 
 
             if (Counter > 0.75f && currentState != fireState)
