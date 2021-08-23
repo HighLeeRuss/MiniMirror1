@@ -22,9 +22,11 @@ namespace Rob
 
         private void Start()
         {
-            fireState = GetComponent<FireState>();
-            waterState = GetComponent<WaterState>();
-            smokeState = GetComponent<SmokeState>();
+            fireState = FindObjectOfType<FireState>();
+            waterState = FindObjectOfType<WaterState>();
+            smokeState = FindObjectOfType<SmokeState>();
+
+            currentState = smokeState;
         }
 
         /// <summary>
