@@ -55,15 +55,6 @@ namespace Rob
                     WaterCounter();
                 }
             
-                if (fireState.spreadFireTo.Count > 0)
-                {
-                    foreach (GameObject tile in fireState.spreadFireTo)
-                    {
-                        Debug.Log(tile);
-                        tile.GetComponent<TileStateManager>().onFire = true;
-                    }
-                }
-            
                 if (Counter > 0.75f && currentState != fireState)
                 {
                     CmdChangeState(fireState);
@@ -93,7 +84,7 @@ namespace Rob
         void FireCounter()
         {
             counterTime += Time.deltaTime;
-            if (counterTime >= delay)
+            if (counterTime >= delay * 2)
             {
                 counterTime = 0f;
                 Counter += 0.1f;
@@ -106,7 +97,7 @@ namespace Rob
             if (counterTime >= delay)
             {
                 counterTime = 0f;
-                Counter -= 0.1f;
+                Counter -= 0.15f;
             }
         }
         

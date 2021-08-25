@@ -25,10 +25,6 @@ namespace RileyMcGowan
                 tileStateManager = other.gameObject.GetComponent<TileStateManager>();
                 StartCoroutine(WetObject());
             }
-            else
-            {
-                StartCoroutine(OldObject());
-            }
         }
         
         IEnumerator WetObject()
@@ -37,11 +33,6 @@ namespace RileyMcGowan
             tileStateManager.beingWet = true;
             yield return new WaitForSeconds(3);
             tileStateManager.beingWet = false;
-            Destroy(gameObject);
-        }
-        IEnumerator OldObject()
-        {
-            yield return new WaitForSeconds(3);
             Destroy(gameObject);
         }
     }

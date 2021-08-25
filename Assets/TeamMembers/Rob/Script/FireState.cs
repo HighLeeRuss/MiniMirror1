@@ -3,56 +3,45 @@ using System.Collections;
 using System.Collections.Generic;
 using Epic.OnlineServices.AntiCheatServer;
 using Epic.OnlineServices.Lobby;
+using Mirror;
 using Mirror.Examples.Pong;
 using UnityEngine;
 using Rob;
 
 namespace Rob
 {
-
-
     public class FireState : StateBase
     {
         private Renderer rend;
         public StateBase smokeState;
         private int moistness;
-        public List<GameObject> spreadFireTo;
         private bool onFire = false;
         private TileStateManager tsm;
-
+        public Collider[] hitColliders;
 
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("Entered");
-            rend = GetComponent<Renderer>(); //getting the renderer of the tile
             onFire = true;
+            Debug.Log("Entered");
             tsm = GetComponent<TileStateManager>();
-            
-            
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, 1);
-            foreach (var hitCollider in hitColliders)
+            hitColliders = Physics.OverlapSphere(transform.position, 1);
+            foreach (Collider hitCollider in hitColliders)
             {
                 Debug.Log(hitCollider);
-                if (hitCollider.gameObject.GetComponent<TileStateManager>() != null && hitCollider.gameObject.GetComponent<TileStateManager>() != tsm)
+                TileStateManager tempTSM = hitCollider.gameObject.GetComponent<TileStateManager>();
+                if (tempTSM != null && tempTSM != tsm)
                 {
                     GameObject tiles = hitCollider.gameObject;
-                    spreadFireTo.Add(tiles);
+                    RpcChangeState(tempTSM);
                 }
-                
-                
             }
-            
+            RpcChangeColour();
         }
 
         public override void Execute()
         {
             base.Execute();
-            Debug.Log("executing");
-            rend.material.SetColor("_Color", Color.red);
-
-            
-
         }
 
         public override void Exit()
@@ -65,6 +54,20 @@ namespace Rob
         private void OnTriggerStay(Collider other)
         {
             other.GetComponent<EventManager>().CallTakeDamageEvent();
+        }
+        
+        [ClientRpc]
+        public override void RpcChangeColour()
+        {
+            base.RpcChangeColour();
+            rend = GetComponent<Renderer>(); //getting the renderer of the tile
+            rend.material.SetColor("_Color", Color.red);
+        }
+        
+        [ClientRpc]
+        public void RpcChangeState(TileStateManager tileSM)
+        {
+            tileSM.onFire = true;
         }
     }
 }
