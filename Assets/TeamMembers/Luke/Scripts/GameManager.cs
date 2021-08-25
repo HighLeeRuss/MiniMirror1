@@ -103,11 +103,6 @@ namespace LukeBaker
             GameWonEvent?.Invoke();
             gameStateManager.stateManager.ChangeState(gameStateManager.endOfGame);
         }
-
-        public void SpawnHealthBars()
-        {
-            
-        }
     }
 }
 
