@@ -1,22 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mirror;
 using UnityEngine;
 using UnityEngine.UI;
 using Rob;
 
 namespace Rob
 {
-    public class HealthBar : MonoBehaviour
+    public class HealthBar : NetworkBehaviour
     {
         public Slider slider;
-
-        public void SetMaxHealth(float health)
+        
+        [ClientRpc]
+        public void RpcSetMaxHealth(float health)
         {
             slider.maxValue = health;
             slider.value = health;
         }
         
-       public void SetHealth(float health)
+        [ClientRpc]
+       public void RpcSetHealth(float health)
        {
            slider.value = health;
        }

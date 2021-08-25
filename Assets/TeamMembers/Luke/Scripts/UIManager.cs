@@ -13,6 +13,7 @@ namespace LukeBaker
     {
         //References
         public Timer timer;
+        public Canvas canvas;
 
         //variables
         public TextMeshProUGUI timerText;
@@ -34,6 +35,11 @@ namespace LukeBaker
         {
             // on the left 0 for the minutes and right of the colon is 1 for seconds
             timerText.text = string.Format("{0:00}:{1:00}", timer.minutes, timer.seconds);
+        }
+
+        public void SpawnHealthBar()
+        {
+            
         }
     }
 }

@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Epic.OnlineServices.AntiCheatCommon;
 using Epic.OnlineServices.Lobby;
+using Mirror;
 using Rob;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+public class Health : NetworkBehaviour
 {
+    [SyncVar]
     public float currentHealth;
     public float maxHealth;
     public HealthBar healthBar;
@@ -16,7 +18,7 @@ public class Health : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
-        healthBar.SetMaxHealth(maxHealth);
+        healthBar.RpcSetMaxHealth(maxHealth);
     }
 
 
@@ -37,11 +39,11 @@ public class Health : MonoBehaviour
      public void DamageEventTaken(float damageAmount)
     {
         currentHealth -= damageAmount;
-        healthBar.SetHealth(currentHealth);
+        healthBar.RpcSetHealth(currentHealth);
         if (currentHealth <= 0)
         {
             currentHealth = 0;
-            healthBar.SetHealth(currentHealth);
+            healthBar.RpcSetHealth(currentHealth);
             Debug.Log("Dead");
         }
         Debug.Log("Damaged current health is now " + currentHealth);
