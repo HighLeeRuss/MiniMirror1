@@ -17,7 +17,6 @@ public class Health : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
-        base.OnStartServer();
         healthBar = GetComponentInChildren<HealthBar>();
         currentHealth = maxHealth;
         healthBar.RpcSetMaxHealth(maxHealth);
