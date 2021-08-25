@@ -17,18 +17,24 @@ public class Health : NetworkBehaviour
     public override void OnStartClient()
     {
         base.OnStartClient();
+        
+    }
+
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
         healthBar = GetComponentInChildren<HealthBar>();
         currentHealth = maxHealth;
+        // FindObjectOfType<EventManager>().DeathEvent += DeathEvent;
+        // FindObjectOfType<EventManager>().OnDamageEvent += DamageEventTaken;
         healthBar.SetMaxHealth(maxHealth);
-        FindObjectOfType<EventManager>().DeathEvent += DeathEvent;
-        FindObjectOfType<EventManager>().OnDamageEvent += DamageEventTaken;
     }
 
     public override void OnStopClient()
     {
         base.OnStopServer();
-        FindObjectOfType<EventManager>().DeathEvent -= DeathEvent;
-        FindObjectOfType<EventManager>().OnDamageEvent -= DamageEventTaken;
+        // FindObjectOfType<EventManager>().DeathEvent -= DeathEvent;
+        // FindObjectOfType<EventManager>().OnDamageEvent -= DamageEventTaken;
     }
 
     public void DamageEventTaken(float damageAmount)
