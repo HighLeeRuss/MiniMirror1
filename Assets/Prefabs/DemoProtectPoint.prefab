@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 5664470216719563982}
   - component: {fileID: 9068831691458421050}
   - component: {fileID: 5075909399168543672}
+  - component: {fileID: -3249645865581897223}
+  - component: {fileID: -5160839829330563193}
   m_Layer: 0
   m_Name: DemoProtectPoint
   m_TagString: Untagged
@@ -115,3 +117,35 @@ MonoBehaviour:
   visible: 0
   m_AssetId: 
   hasSpawned: 0
+--- !u!114 &-3249645865581897223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6084905142772319478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 517cf593a94be3443a8ff711ffb237f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  currentHealth: 0
+  maxHealth: 10
+  healthBar: {fileID: -5160839829330563193}
+--- !u!114 &-5160839829330563193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6084905142772319478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d644bb8b005e564d8efc9c2bc03cf13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  slider: {fileID: 0}
