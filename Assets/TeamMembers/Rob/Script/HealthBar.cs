@@ -11,11 +11,13 @@ namespace Rob
     {
         public Slider slider;
         
-        [ClientRpc]
-        public void RpcSetMaxHealth(float health)
+        public void SetMaxHealth(float health)
         {
-            slider.maxValue = health;
-            slider.value = health;
+            if (isClient)
+            {
+                slider.maxValue = health;
+                slider.value = health; 
+            }
         }
         
         [ClientRpc]

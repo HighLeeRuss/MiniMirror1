@@ -19,7 +19,7 @@ public class Health : NetworkBehaviour
         base.OnStartClient();
         healthBar = GetComponentInChildren<HealthBar>();
         currentHealth = maxHealth;
-        healthBar.RpcSetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth(maxHealth);
         FindObjectOfType<EventManager>().DeathEvent += DeathEvent;
         FindObjectOfType<EventManager>().OnDamageEvent += DamageEventTaken;
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using LukeBaker;
 using Mirror;
 
 namespace Rob
@@ -28,7 +29,7 @@ namespace Rob
             smokeState = GetComponent<SmokeState>();
             if (isServer)
             {
-                CmdChangeState(smokeState);
+                ChangeState(smokeState);
             }
         }
 
@@ -57,17 +58,17 @@ namespace Rob
             
                 if (Counter > 0.75f && currentState != fireState)
                 {
-                    CmdChangeState(fireState);
+                    ChangeState(fireState);
                 }
             
                 else if (Counter < -0.75f && currentState != waterState)
                 {
-                    CmdChangeState(waterState);
+                    ChangeState(waterState);
                 }
             
                 if (Counter < 0.7f && Counter > -0.7f && currentState != smokeState)
                 {
-                    CmdChangeState(smokeState);
+                    ChangeState(smokeState);
                 }
             
                 //Remind what the current state is
@@ -125,8 +126,7 @@ namespace Rob
             }
         }
         
-        [Command(requiresAuthority = false)]
-        public void CmdChangeState(StateBase newState)
+        public void ChangeState(StateBase newState)
         {
             RpcChangeState(newState);
         }
