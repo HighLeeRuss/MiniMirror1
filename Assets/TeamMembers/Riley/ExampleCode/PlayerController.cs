@@ -18,13 +18,13 @@ namespace RileyMcGowan
         private float vertical;
         public CharacterController characterController;
 
-        public override void OnStartClient()
+        public override void OnStartLocalPlayer()
         {
             base.OnStartClient();
-            playerControls = new PlayerInputBasic();
-            playerControls.Enable(); //Turn on action map
-            if (isLocalPlayer)
+            //if (isLocalPlayer)
             {
+                playerControls = new PlayerInputBasic();
+                playerControls.Enable(); //Turn on action map
                 //Grab a control performed > Ignore the provided context > Input the client position and rotation
                 playerControls.InGame.MouseClick.performed += context => CmdShootWater(waterGun.transform.position, waterGun.transform.rotation);
             }

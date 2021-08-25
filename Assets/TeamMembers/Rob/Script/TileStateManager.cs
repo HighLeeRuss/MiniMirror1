@@ -131,7 +131,6 @@ namespace Rob
             RpcChangeState(newState);
         }
         
-        [ClientRpc]
         private void RpcChangeState(StateBase newState)
         {
             if (currentState != null)

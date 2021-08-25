@@ -33,10 +33,14 @@ namespace Rob
                 if (tempTSM != null && tempTSM != tsm)
                 {
                     GameObject tiles = hitCollider.gameObject;
-                    RpcChangeState(tempTSM);
+                    //RpcChangeState(tempTSM);
                 }
             }
-            RpcChangeColour();
+
+            if (isServer)
+            {
+                RpcChangeColour();
+            }
         }
 
         public override void Execute()
@@ -62,12 +66,6 @@ namespace Rob
             base.RpcChangeColour();
             rend = GetComponent<Renderer>(); //getting the renderer of the tile
             rend.material.SetColor("_Color", Color.red);
-        }
-        
-        [ClientRpc]
-        public void RpcChangeState(TileStateManager tileSM)
-        {
-            tileSM.onFire = true;
         }
     }
 }

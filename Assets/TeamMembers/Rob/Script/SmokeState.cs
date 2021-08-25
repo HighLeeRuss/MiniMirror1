@@ -20,7 +20,7 @@ namespace Rob
         {
             base.Enter();
             Debug.Log("Entered");
-            if (isClient)
+            if (isServer)
             {
                 RpcChangeColour();
             }

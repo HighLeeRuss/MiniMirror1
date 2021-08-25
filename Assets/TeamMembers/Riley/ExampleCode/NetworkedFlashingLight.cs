@@ -20,7 +20,7 @@ namespace RileyMcGowan
                 if (i > 4)
                 {
                     Color currentColour = new Color(Random.value, Random.value, Random.value);
-                    if (isClient)
+                    if (isServer)
                     {
                         Debug.Log(currentColour);
                         RpcChangeLightColour(currentColour);

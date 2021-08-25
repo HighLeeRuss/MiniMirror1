@@ -27,7 +27,7 @@ public class Health : NetworkBehaviour
         currentHealth = maxHealth;
         // FindObjectOfType<EventManager>().DeathEvent += DeathEvent;
         // FindObjectOfType<EventManager>().OnDamageEvent += DamageEventTaken;
-        healthBar.SetMaxHealth(maxHealth);
+        healthBar.RpcSetMaxHealth(maxHealth);
     }
 
     public override void OnStopClient()
