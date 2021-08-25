@@ -14,28 +14,25 @@ public class Health : NetworkBehaviour
     public HealthBar healthBar;
 
 
-    public override void OnStartServer()
+    public override void OnStartClient()
     {
+        base.OnStartClient();
         base.OnStartServer();
+        healthBar = GetComponentInChildren<HealthBar>();
         currentHealth = maxHealth;
         healthBar.RpcSetMaxHealth(maxHealth);
+        FindObjectOfType<EventManager>().DeathEvent += DeathEvent;
+        FindObjectOfType<EventManager>().OnDamageEvent += DamageEventTaken;
     }
-    
-    public void OnEnable()
-     {
-         FindObjectOfType<EventManager>().DeathEvent += DeathEvent;
-         FindObjectOfType<EventManager>().OnDamageEvent += DamageEventTaken;
 
-     }
+    public override void OnStopClient()
+    {
+        base.OnStopServer();
+        FindObjectOfType<EventManager>().DeathEvent -= DeathEvent;
+        FindObjectOfType<EventManager>().OnDamageEvent -= DamageEventTaken;
+    }
 
-     public void OnDisable()
-     {
-         FindObjectOfType<EventManager>().DeathEvent -= DeathEvent;
-         FindObjectOfType<EventManager>().OnDamageEvent -= DamageEventTaken;
-     }
-
-
-     public void DamageEventTaken(float damageAmount)
+    public void DamageEventTaken(float damageAmount)
     {
         if (isServer)
         {
@@ -61,11 +58,11 @@ public class Health : NetworkBehaviour
         Debug.Log("Died");
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            FindObjectOfType<EventManager>().CallTakeDamageEvent();
-        }
-    }
+    // private void Update()
+    // {
+    //     if (Input.GetKeyDown(KeyCode.A))
+    //     {
+    //         FindObjectOfType<EventManager>().CallTakeDamageEvent();
+    //     }
+    // }
 }
