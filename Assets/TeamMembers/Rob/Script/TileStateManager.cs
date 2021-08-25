@@ -56,12 +56,12 @@ namespace Rob
                     WaterCounter();
                 }
             
-                if (Counter > 0.75f && currentState != fireState)
+                if (Counter > 0.7f && currentState != fireState)
                 {
                     ChangeState(fireState);
                 }
             
-                else if (Counter < -0.75f && currentState != waterState)
+                else if (Counter < -0.7f && currentState != waterState)
                 {
                     ChangeState(waterState);
                 }
