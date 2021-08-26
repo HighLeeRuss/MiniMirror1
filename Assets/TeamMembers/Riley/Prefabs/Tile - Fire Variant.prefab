@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: -3449519876200601444, guid: d3c22faaa36df2d44b6cfe78ed733411,
         type: 3}
       propertyPath: onFire
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -3449519876200601444, guid: d3c22faaa36df2d44b6cfe78ed733411,
         type: 3}

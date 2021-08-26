@@ -42,5 +42,11 @@ namespace Rob
             rend = GetComponent<Renderer>(); //getting the renderer of the tile
             rend.material.SetColor("_Color", Color.blue);
         }
+        
+        public void ForcedChangeState()
+        {
+            rend = GetComponent<Renderer>(); //getting the renderer of the tile
+            rend.material.SetColor("_Color", Color.blue);
+        }
     }
 }

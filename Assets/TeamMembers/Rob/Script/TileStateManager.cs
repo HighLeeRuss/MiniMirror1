@@ -27,10 +27,12 @@ namespace Rob
             fireState = GetComponent<FireState>();
             waterState = GetComponent<WaterState>();
             smokeState = GetComponent<SmokeState>();
-            if (isServer)
-            {
-                ChangeState(smokeState);
-            }
+        }
+
+        public override void OnStartClient()
+        {
+            base.OnStartLocalPlayer();
+            GetComponent<SmokeState>().ForcedChangeState();
         }
 
         /// <summary>
@@ -44,7 +46,7 @@ namespace Rob
                 waterState = GetComponent<WaterState>();
                 smokeState = GetComponent<SmokeState>();
             }
-            if (isClient)
+            if (isServer)
             {
                 if (onFire)
                 {
@@ -55,22 +57,20 @@ namespace Rob
                 {
                     WaterCounter();
                 }
-            
+
                 if (Counter > 0.7f && currentState != fireState)
                 {
                     ChangeState(fireState);
                 }
-            
                 else if (Counter < -0.7f && currentState != waterState)
                 {
                     ChangeState(waterState);
                 }
-            
-                if (Counter < 0.7f && Counter > -0.7f && currentState != smokeState)
+                else if (Counter < 0.7f && Counter > -0.7f && currentState != smokeState)
                 {
                     ChangeState(smokeState);
                 }
-            
+                
                 //Remind what the current state is
                 currentState?.Execute();
             }
@@ -126,12 +126,7 @@ namespace Rob
             }
         }
         
-        public void ChangeState(StateBase newState)
-        {
-            RpcChangeState(newState);
-        }
-        
-        private void RpcChangeState(StateBase newState)
+        private void ChangeState(StateBase newState)
         {
             if (currentState != null)
             {

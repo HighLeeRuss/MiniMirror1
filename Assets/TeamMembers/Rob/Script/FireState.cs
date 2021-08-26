@@ -33,6 +33,7 @@ namespace Rob
                 if (tempTSM != null && tempTSM != tsm)
                 {
                     GameObject tiles = hitCollider.gameObject;
+                    RpcChangeState(tiles);
                     //RpcChangeState(tempTSM);
                 }
             }
@@ -53,6 +54,7 @@ namespace Rob
             base.Exit();
             //tsm.ChangeState(smokeState);
             Debug.Log(tsm.currentState);
+            onFire = false;
         }
 
         private void OnTriggerStay(Collider other)
@@ -64,6 +66,18 @@ namespace Rob
         public override void RpcChangeColour()
         {
             base.RpcChangeColour();
+            rend = GetComponent<Renderer>(); //getting the renderer of the tile
+            rend.material.SetColor("_Color", Color.red);
+        }
+
+        [ClientRpc]
+        public void RpcChangeState(GameObject tile)
+        {
+            tile.GetComponent<TileStateManager>().onFire = true;
+        }
+        
+        public void ForcedChangeState()
+        {
             rend = GetComponent<Renderer>(); //getting the renderer of the tile
             rend.material.SetColor("_Color", Color.red);
         }
